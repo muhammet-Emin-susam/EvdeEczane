@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex align-items-center justify-content-between">
+    <div>
+        <h6 class="text-muted mb-1">Hoşgeldiniz, @Session["KullaniciAdi"]!</h6>
+        <h5 class="mb-0">Dashboard</h5>
+    </div>
+</div>
+
+<div class="row row-cols-xl-5 row-cols-md-2 row-cols-1">
+    <div class="col mt-4">
+        <a href="#!" class="features feature-primary d-flex justify-content-between align-items-center rounded shadow p-3">
+            <div class="d-flex align-items-center">
+                <div class="icon text-center rounded-pill">
+                    <i class="uil uil-trademark-circle fs-4 mb-0"></i>
+                </div>
+                <div class="flex-1 ms-3">
+                    <h6 class="mb-0 text-muted">Marka Sayısı</h6>
+                    <p class="fs-5 text-dark fw-bold mb-0"><span class="counter-value" data-target="@ViewBag.MarkaSayisi">2100</span></p>
+                </div>
+            </div>
+
+            @*<span class="text-danger"><i class="uil uil-chart-down"></i> 0.5%</span>*@
+        </a>
+    </div><!--end col-->
+
+    <div class="col mt-4">
+        <a href="#!" class="features feature-primary d-flex justify-content-between align-items-center rounded shadow p-3">
+            <div class="d-flex align-items-center">
+                <div class="icon text-center rounded-pill">
+                    <i class="uil uil-usd-circle fs-4 mb-0"></i>
+                </div>
+                <div class="flex-1 ms-3">
+                    <h6 class="mb-0 text-muted">Kampan. Sayısı</h6>
+                    <p class="fs-5 text-dark fw-bold mb-0"><span class="counter-value" data-target="@ViewBag.KampanyaSayisi">35214</span></p>
+                </div>
+            </div>
+
+            @*<span class="text-success"><i class="uil uil-arrow-growth"></i> 3.84%</span>*@
+        </a>
+    </div><!--end col-->
+
+    <div class="col mt-4">
+        <a href="#!" class="features feature-primary d-flex justify-content-between align-items-center rounded shadow p-3">
+            <div class="d-flex align-items-center">
+                <div class="icon text-center rounded-pill">
+                    <i class="uil uil-blogger-alt fs-4 mb-0"></i>
+                </div>
+                <div class="flex-1 ms-3">
+                    <h6 class="mb-0 text-muted">Blog Sayısı</h6>
+                    <p class="fs-5 text-dark fw-bold mb-0"><span class="counter-value" data-target="@ViewBag.BlogSayisi">3402</span></p>
+                </div>
+            </div>
+
+            @*<span class="text-success"><i class="uil uil-arrow-growth"></i> 1.46%</span>*@
+        </a>
+    </div><!--end col-->
+
+    <div class="col mt-4">
+        <a href="#!" class="features feature-primary d-flex justify-content-between align-items-center rounded shadow p-3">
+            <div class="d-flex align-items-center">
+                <div class="icon text-center rounded-pill">
+                    <i class="uil uil-store fs-4 mb-0"></i>
+                </div>
+                <div class="flex-1 ms-3">
+                    <h6 class="mb-0 text-muted">Stok Sayısı</h6>
+                    <p class="fs-5 text-dark fw-bold mb-0"><span class="counter-value" data-target="@ViewBag.StokSayisi">23</span></p>
+                </div>
+            </div>
+
+            @*<span class="text-muted"><i class="uil uil-analysis"></i> 0.0%</span>*@
+        </a>
+    </div><!--end col-->
+
+    <div class="col mt-4">
+        <a href="#!" class="features feature-primary d-flex justify-content-between align-items-center rounded shadow p-3">
+            <div class="d-flex align-items-center">
+                <div class="icon text-center rounded-pill">
+                    <i class="uil uil-users-alt fs-4 mb-0"></i>
+                </div>
+                <div class="flex-1 ms-3">
+                    <h6 class="mb-0 text-muted">Kullanıcı Sayısı</h6>
+                    <p class="fs-5 text-dark fw-bold mb-0"><span class="counter-value" data-target="@ViewBag.KullaniciSayisi">1.5</span></p>
+                </div>
+            </div>
+
+            @*<span class="text-danger"><i class="uil uil-chart-down"></i> 0.5%</span>*@
+        </a>
+    </div><!--end col-->
+</div><!--end row-->

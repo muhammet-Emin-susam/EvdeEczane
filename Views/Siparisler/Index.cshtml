@@ -1,0 +1,78 @@
+﻿@using EvdeEczane.Models
+@model List<Siparisler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content" style="margin-top:50px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="products mb-3">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-12 col-lg-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Sipariş Tarihi</th>
+                                        <th scope="col">Sipariş Toplam Tutar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <th scope="row">@item.ID</th>
+                                            <td>@item.SiparisTarihi</td>
+                                            <td>@item.ToplamTutar</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div><!-- End .col-lg-9 -->
+            <aside class="col-lg-3 order-lg-first">
+                <div class="sidebar sidebar-shop">
+
+
+                    <div class="widget ">
+                        <h3 class="widget-title">
+                            <span class="text-danger">
+                                ÜRÜN GRUPLARI
+                            </span>
+                        </h3><!-- End .widget-title -->
+                        <hr />
+
+                        <div class="collapse show" id="widget-1">
+                            <div class="widget-body">
+                                <div class="filter-items filter-items-count">
+                                    @foreach (var item in ViewBag.Menuler)
+                                    {
+                                        <a href="/Kategoriler/Kategori/@item.ID" class="text-dark">
+                                            <div class="filter-item">
+
+                                                <div class="custom-control">
+                                                    <i class="icon-angle-right"></i>
+                                                    @item.MenuAdi
+
+                                                </div><!-- End .custom-checkbox -->
+                                            </div><!-- End .filter-item -->
+                                        </a>
+                                    }
+                                </div><!-- End .filter-items -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+
+
+                </div><!-- End .sidebar sidebar-shop -->
+            </aside><!-- End .col-lg-3 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .page-content -->

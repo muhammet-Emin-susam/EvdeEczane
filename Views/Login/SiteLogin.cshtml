@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "SiteLogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Anasayfa</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Giriş Yap</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('/Content/assets/images/login.png')">
+    <div class="container">
+        <div class="form-box">
+            <div class="form-tab">
+                <ul class="nav nav-pills nav-fill" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab" aria-controls="signin-2" aria-selected="false">Giriş Yap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="register-tab-2" data-toggle="tab" href="#register-2" role="tab" aria-controls="register-2" aria-selected="true">Kayıt Ol</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+                        <form action="#">
+                            <div class="form-group">
+                                <label for="singin-email-2">Kullanıcı Email</label>
+                                <input type="text" class="form-control" id="KullaniciAdi" name="singin-email" required>
+                            </div><!-- End .form-group -->
+
+                            <div class="form-group">
+                                <label for="singin-password-2">Şifre *</label>
+                                <input type="password" class="form-control" id="Sifre" name="singin-password" required>
+                            </div><!-- End .form-group -->
+
+                            <div class="form-footer">
+                                <button type="button" onclick="Login()" class="btn btn-outline-primary-2">
+                                    <span>Giriş Yap</span>
+                                    <i class="icon-long-arrow-right"></i>
+                                </button>
+                                
+                            </div><!-- End .form-footer -->
+                        </form>
+                    </div><!-- .End .tab-pane -->
+                    <div class="tab-pane fade show active" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+                        
+                            <div class="form-group">
+                                <label for="register-email-2">Email Adresiniz *</label>
+                                <input type="email" class="form-control" id="RegisterEmail" name="register-email" required>
+                            </div><!-- End .form-group -->
+                            <div class="form-group">
+                                <label for="register-email-2">Kullanıcı Adı ve Soyadı *</label>
+                                <input type="email" class="form-control" id="RegisterUser" name="register-email" required>
+                            </div><!-- End .form-group -->
+
+                            <div class="form-group">
+                                <label for="register-password-2">Şifre *</label>
+                                <input type="password" class="form-control" id="RegisterPassword" name="register-password" required>
+                            </div><!-- End .form-group -->
+
+                            <div class="form-footer">
+                                <button type="button" onclick="RegisterUser()" class="btn btn-outline-primary-2">
+                                    <span>Kayıt Ol</span>
+                                    <i class="icon-long-arrow-right"></i>
+                                </button>
+
+                            </div><!-- End .form-footer -->
+                        
+                        <div class="form-choice">
+                            <p class="text-center">ya da Giriş Yap</p>
+                            
+                        </div><!-- End .form-choice -->
+                    </div><!-- .End .tab-pane -->
+                </div><!-- End .tab-content -->
+            </div><!-- End .form-tab -->
+        </div><!-- End .form-box -->
+    </div><!-- End .container -->
+</div><!-- End .login-page section-bg -->
+
+
+@section Adjs{
+    <script>
+        function Login() {
+            getValue("/Login/SiteGirisYap",
+                { KullaniciAdi: $('#KullaniciAdi').val(), Sifre: $('#Sifre').val() },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        @*setTimeout(function () { window.location.replace("@Url.Action("Index","Home")"); }, 1400); // BAŞKA SAYFAYA GÖNDERME*@
+                        window.location.replace("@Url.Action("Index","Home")")
+                    }
+                    else if (data == 'Hata') {
+                        alert("Hata");
+                    }
+                    else if (data == 'Bos') {
+                        alert("Lütfen Bilgileri Doldurunuz");
+                    }
+                });
+        };
+        function RegisterUser() {
+            getValue("/Login/KayitOl",
+            { RegisterUser: $('#RegisterUser').val(), RegisterEmail: $('#RegisterEmail').val(), RegisterPassword: $('#RegisterPassword').val() },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+
+                        setTimeout(function () { window.location.replace("@Url.Action("SiteLogin", "Login")"); }, 1400); // BAŞKA SAYFAYA GÖNDERME
+                    }
+                    else if (data.indexOf('Hata') > -1) {
+                        alert("asdas");
+                    }
+
+                });
+        };
+    </script>
+    }

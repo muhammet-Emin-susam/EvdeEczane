@@ -1,0 +1,46 @@
+﻿@model EvdeEczane.Models.Bilgiler
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb" class="breadcrumb-nav mb-3" style="background-color:#fbfbfb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Home/Index">Anasayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Sayfalar</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Hakkımızda</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="text-center">HAKKIMIZDA</h4>
+                <hr />
+            <br />
+                <article class="entry">
+                    <figure class="entry-media" style="height: 658px;">
+                            <iframe width="1168" height="658" src="https://www.youtube.com/embed/2iEyq6IcPW0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </figure><!-- End .entry-media -->
+
+                    <div class="entry-body">
+                        <h2 class="entry-title">
+                            Hakkımızda
+                        </h2><!-- End .entry-title -->
+
+                        <div class="entry-content">
+                            <p>
+                            @Html.Raw(Model.SiteHakkimizda)</p>
+                        </div><!-- End .entry-content -->
+                    </div><!-- End .entry-body -->
+                </article><!-- End .entry -->
+
+            </div><!-- End .col-lg-9 -->
+
+            
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .page-content -->

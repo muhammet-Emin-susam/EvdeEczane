@@ -1,0 +1,672 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="intro-slider-container">
+    <div class="intro-slider owl-carousel owl-simple owl-nav-inside" data-toggle="owl" data-owl-options='{
+                        "nav": false,
+                        "responsive": {
+                            "992": {
+                                "nav": true
+                            }
+                        }
+                    }'>
+        @foreach (var item in ViewBag.Slider)
+        {
+            <a href="@item.SliderURL">
+                <div class="intro-slide" style="background-image: url(@item.SliderResim);">
+                    <div class="container intro-content">
+                        
+                    </div><!-- End .container intro-content -->
+                </div><!-- End .intro-slide -->
+            </a>
+        }
+    </div><!-- End .owl-carousel owl-simple -->
+
+    <span class="slider-loader"></span><!-- End .slider-loader -->
+</div>
+
+<br />
+<br />
+
+@*TREND ÜRÜNLER*@
+
+<div class="container electronics">
+    <div class="heading  heading-border mb-3">
+        <div class="heading-left">
+            <h2 class="title text-center mb-2">TREND ÜRÜNLER</h2><!-- End .title -->
+        </div><!-- End .heading-left -->
+
+
+    </div><!-- End .heading -->
+
+    <div class="tab-content tab-content-carousel">
+        <div class="tab-pane p-0 fade show active" id="elec-new-tab" role="tabpanel" aria-labelledby="elec-new-link">
+            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+                 data-owl-options='{
+                                "nav": false,
+                                "dots": true,
+                                "margin": 20,
+                                "loop": false,
+                                "responsive": {
+                                    "0": {
+                                        "items":2
+                                    },
+                                    "480": {
+                                        "items":2
+                                    },
+                                    "768": {
+                                        "items":3
+                                    },
+                                    "992": {
+                                        "items":4
+                                    },
+                                    "1280": {
+                                        "items":5,
+                                        "nav": true
+                                    }
+                                }
+                            }'>
+                @foreach (var item in ViewBag.Trend)
+                {
+                    <div class="product">
+                        <figure class="product-media">
+                            <span class="product-label label-new">TREND</span>
+                            @if (item.isYeni == true)
+                            {
+                                <span class="product-label label-new">YENİ</span>
+                            }
+                            <a href="/StokDetay/StokDetay/@item.ID">
+                                <img src="@item.StokResim" alt="Product image" class="product-image">
+                            </a>
+
+                            <!--<div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                            </div>-->
+                            <!-- End .product-action-vertical -->
+
+                            <div class="product-action">
+                                <a href="" class="btn-product btn-cart" title="Add to cart" onclick="AddCart(@item.ID)"><span>Sepete Ekle</span></a>
+                            </div><!-- End .product-action -->
+                        </figure><!-- End .product-media -->
+
+                        <div class="product-body">
+                            <div class="product-cat">
+                                <a href="/Kategoriler/Kategori/@item.Menuler.ID">@item.Menuler.MenuAdi</a>
+                            </div><!-- End .product-cat -->
+                            <h3 class="product-title"><a href="/StokDetay/StokDetay/@item.ID">@item.StokAdi</a></h3><!-- End .product-title -->
+                            <div class="product-price">
+                                @item.StokFiyat TL
+                            </div><!-- End .product-price -->
+                        </div><!-- End .product-body -->
+                    </div><!-- End .product -->
+                }
+            </div><!-- End .owl-carousel -->
+        </div><!-- .End .tab-pane -->
+
+    </div><!-- End .tab-content -->
+</div>
+
+@*KATEGORİLER*@
+
+<div class="container">
+    <h2 class="title text-center mb-2"></h2><!-- End .title -->
+
+    <div class="cat-blocks-container">
+        <div class="row" style=" margin-right: -570px;">
+            @foreach (var item in ViewBag.Kategoriler)
+            {
+
+
+                <div class="col-6 col-sm-4 col-lg-1">
+                    <a href="/Kategoriler/Kategori/@item.ID" class="cat-block">
+                        <figure>
+                            <span>
+                                <img src="@item.MenuResim" alt="Category image">
+                            </span>
+                        </figure>
+
+                        <h3 class="cat-block-title">@item.MenuAdi</h3><!-- End .cat-block-title -->
+                    </a>
+                </div><!-- End .col-sm-4 col-lg-2 -->
+            }
+
+
+        </div><!-- End .row -->
+    </div><!-- End .cat-blocks-container -->
+</div><!-- End .container -->
+@*KAMPANYALAR*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-lg-3">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam2.png" alt="Banner">
+                </a>
+
+                <!--<div class="banner-content">
+                    <h4 class="banner-subtitle text-white"><a href="#">Weekend Sale</a></h4>--><!-- End .banner-subtitle -->
+                    <!--<h3 class="banner-title text-white"><a href="#">Lighting <br>& Accessories <br><span>25% off</span></a></h3>--><!-- End .banner-title -->
+                    <!--<a href="#" class="banner-link">Shop Now <i class="icon-long-arrow-right"></i></a>
+                </div>--><!-- End .banner-content -->
+            </div><!-- End .banner -->
+        <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam1.png" alt="Banner">
+                </a>
+
+                <!--<div class="banner-content">
+                    <h4 class="banner-subtitle text-white"><a href="#">Weekend Sale</a></h4>--><!-- End .banner-subtitle -->
+                    <!--<h3 class="banner-title text-white"><a href="#">Lighting <br>& Accessories <br><span>25% off</span></a></h3>--><!-- End .banner-title -->
+                    <!--<a href="#" class="banner-link">Shop Now <i class="icon-long-arrow-right"></i></a>
+                </div>--><!-- End .banner-content -->
+            </div><!-- End .banner -->
+        </div><!-- End .col-lg-3 -->
+        <div class="col-sm-6 col-lg-3 order-lg-last">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam5.png" alt="Banner">
+                </a>
+
+                
+            </div><!-- End .banner -->
+        <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam5.png" alt="Banner">
+                </a>
+
+                
+            </div><!-- End .banner -->
+        </div><!-- End .col-lg-3 -->
+
+        <div class="col-lg-6">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam4.png" alt="Banner">
+                </a>
+                
+            </div><!-- End .banner -->
+        </div><!-- End .col-lg-6 -->
+    </div><!-- End .row -->
+</div><!-- End .container -->
+@*ÇOK SATANLAR*@
+
+<div class="container electronics">
+    <div class="heading  heading-border mb-3">
+        <div class="heading-left">
+            <h2 class="title text-center mb-2">ÇOK SATANLAR</h2><!-- End .title -->
+        </div><!-- End .heading-left -->
+
+
+    </div><!-- End .heading -->
+
+    <div class="tab-content tab-content-carousel">
+        <div class="tab-pane p-0 fade show active" id="elec-new-tab" role="tabpanel" aria-labelledby="elec-new-link">
+            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+                 data-owl-options='{
+                                "nav": false,
+                                "dots": true,
+                                "margin": 20,
+                                "loop": false,
+                                "responsive": {
+                                    "0": {
+                                        "items":2
+                                    },
+                                    "480": {
+                                        "items":2
+                                    },
+                                    "768": {
+                                        "items":3
+                                    },
+                                    "992": {
+                                        "items":4
+                                    },
+                                    "1280": {
+                                        "items":5,
+                                        "nav": true
+                                    }
+                                }
+                            }'>
+                @foreach (var item in ViewBag.CokSatanlar)
+                {
+
+
+                    <div class="product">
+                        <figure class="product-media">
+                            <span class="product-label label-new">ÇOK SATANLAR</span>
+                            @if (item.isYeni == true)
+                            {
+                                <span class="product-label label-new">YENİ</span>
+                            }
+                            @if (item.isTrend == true)
+                            {
+                                <span class="product-label label-new">TREND</span>
+                            }
+                            <a href="/StokDetay/StokDetay/@item.ID">
+                                <img src="@item.StokResim" alt="Product image" class="product-image">
+                            </a>
+
+                            <!--<div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                            </div>-->
+                            <!-- End .product-action-vertical -->
+
+                            <div class="product-action">
+                                <a href="#" class="btn-product btn-cart" title="Add to cart" onclick="AddCart(@item.ID)"><span>Sepete Ekle</span></a>
+                            </div><!-- End .product-action -->
+                        </figure><!-- End .product-media -->
+
+                        <div class="product-body">
+                            <div class="product-cat">
+                                <a href="/Kategoriler/Kategori/@item.Menuler.ID">@item.Menuler.MenuAdi</a>
+                            </div><!-- End .product-cat -->
+                            <h3 class="product-title"><a href="/StokDetay/StokDetay/@item.ID">@item.StokAdi</a></h3><!-- End .product-title -->
+                            <div class="product-price">
+                                @item.StokFiyat TL
+                            </div><!-- End .product-price -->
+                            
+                        </div><!-- End .product-body -->
+                    </div><!-- End .product -->
+
+                }
+            </div><!-- End .owl-carousel -->
+        </div><!-- .End .tab-pane -->
+
+    </div><!-- End .tab-content -->
+</div>
+
+
+@*KAMPANYALAR2*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam6.png" alt="Banner">
+                </a>
+
+            </div><!-- End .banner -->
+        </div><!-- End .col-lg-6 -->
+        <div class="col-lg-6">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam3.png" alt="Banner">
+                </a>
+            </div><!-- End .banner -->
+        </div><!-- End .col-lg-6 -->
+        <div class="col-lg-12">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam10.png" alt="Banner">
+                </a>
+
+                
+            </div><!-- End .banner -->
+        </div><!-- End .col-lg-6 -->
+    </div><!-- End .row -->
+</div><!-- End .container -->
+
+<br />
+<br />
+
+@*YENİ ÜRÜNLER*@
+
+<div class="container electronics">
+    <div class="heading  heading-border mb-3">
+        <div class="heading-left">
+            <h2 class="title text-center mb-2">YENİ ÜRÜNLER</h2><!-- End .title -->
+        </div><!-- End .heading-left -->
+
+
+    </div><!-- End .heading -->
+
+    <div class="tab-content tab-content-carousel">
+        <div class="tab-pane p-0 fade show active" id="elec-new-tab" role="tabpanel" aria-labelledby="elec-new-link">
+            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+                 data-owl-options='{
+                                "nav": false,
+                                "dots": true,
+                                "margin": 20,
+                                "loop": false,
+                                "responsive": {
+                                    "0": {
+                                        "items":2
+                                    },
+                                    "480": {
+                                        "items":2
+                                    },
+                                    "768": {
+                                        "items":3
+                                    },
+                                    "992": {
+                                        "items":4
+                                    },
+                                    "1280": {
+                                        "items":5,
+                                        "nav": true
+                                    }
+                                }
+                            }'>
+                @foreach (var item in ViewBag.Yeni)
+                {
+                    <div class="product">
+                        <figure class="product-media">
+                            <span class="product-label label-new">YENİ</span>
+                            @if (item.isTrend == true)
+                            {
+                                <span class="product-label label-new">TREND</span>
+                            }
+                            @if (item.isIndirim == true)
+                            {
+                                <span class="product-label label-new">İNDİRİMLİ</span>
+                            }
+
+                            <a href="/StokDetay/StokDetay/@item.ID">
+                                <img src="@item.StokResim" alt="Product image" class="product-image">
+                            </a>
+
+                            <!--<div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                            </div>-->
+                            <!-- End .product-action-vertical -->
+
+                            <div class="product-action">
+                                <a href="#" class="btn-product btn-cart" title="Add to cart" onclick="AddCart(@item.ID)"><span>SEPETE EKLE</span></a>
+                            </div><!-- End .product-action -->
+                        </figure><!-- End .product-media -->
+
+                        <div class="product-body">
+                            <div class="product-cat">
+                                <a href="/Kategoriler/Kategori/@item.Menuler.ID">@item.Menuler.MenuAdi</a>
+                            </div><!-- End .product-cat -->
+                            <h3 class="product-title"><a href="/StokDetay/StokDetay/@item.ID">@item.StokAdi</a></h3><!-- End .product-title -->
+                            <div class="product-price">
+                                @item.StokFiyat TL
+                            </div><!-- End .product-price -->
+                            <div class="ratings-container">
+                                <div class="ratings">
+                                    <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                </div><!-- End .ratings -->
+                                <span class="ratings-text">( 12 Reviews )</span>
+                            </div><!-- End .rating-container -->
+                        </div><!-- End .product-body -->
+                    </div><!-- End .product -->
+                }
+            </div><!-- End .owl-carousel -->
+        </div><!-- .End .tab-pane -->
+
+    </div><!-- End .tab-content -->
+</div>
+
+
+
+
+
+
+@*KAMPANYALAR 3*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam11.png" alt="Banner">
+                </a>
+
+                
+            </div><!-- End .banner -->
+        </div><!-- End .col-lg-6 -->
+        <div class="col-lg-6">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam12.png" alt="Banner">
+                </a>
+            </div><!-- End .banner -->
+        </div><!-- End .col-lg-6 -->
+        <div class="col-lg-4">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam13.jpg" alt="Banner">
+                </a>
+            </div><!-- End .banner -->
+        </div>
+        <div class="col-lg-4">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam14.png" alt="Banner">
+                </a>
+            </div><!-- End .banner -->
+        </div>
+        <div class="col-lg-4">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam15.png" alt="Banner">
+                </a>
+            </div><!-- End .banner -->
+        </div><!-- End .col-lg-6 -->
+    </div><!-- End .row -->
+</div><!-- End .container -->
+@*VİTRİN İNDİRİMLER*@
+
+<br />
+<br />
+<br />
+
+<div class="container">
+    <h2 class="title text-center">VİTRİN İNDİRİMLER</h2><!-- End .title -->
+
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="tab-new" role="tabpanel" aria-labelledby="tab-new-link">
+            <div class="row justify-content-center">
+                @foreach (var item in ViewBag.Indirim)
+                {
+
+
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="product product-4">
+                            <figure class="product-media">
+                                <a href="/StokDetay/StokDetay/@item.ID">
+                                    <img src="@item.StokResim" alt="Product image" class="product-image">
+                                </a>
+
+
+                                <div class="product-action">
+                                    <a href="#" class="btn-product" onclick="AddCart(@item.ID)"><span>Sepete Ekle</span></a>
+                                </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
+
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    <a href="/Kategoriler/Kategori/@item.Menuler.ID">@item.Menuler.MenuAdi</a>
+                                </div><!-- End .product-cat -->
+                                <h3 class="product-title"><a href="/StokDetay/StokDetay/@item.ID">@item.StokAdi</a></h3><!-- End .product-title -->
+                                <div class="product-price">
+                                    <del>@item.StokFiyat TL</del> <span style="margin-left:10px"> @item.IndirimliFiyat TL</span>
+                                </div><!-- End .product-price -->
+
+                            </div><!-- End .product-body -->
+                        </div><!-- End .product -->
+                    </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                }
+            </div><!-- End .row -->
+        </div><!-- .End .tab-pane -->
+
+
+    </div><!-- End .tab-content -->
+
+    <div class="mb-3"></div><!-- End .mb-6 -->
+</div><!-- End .container -->
+@*KAMPANYALAR 4*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam16.png" alt="Banner">
+                </a>
+
+            </div><!-- End .banner -->
+        </div><!-- End .col-lg-6 -->
+        <div class="col-lg-6">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Resimler/Kampanya/kam17.png" alt="Banner">
+                </a>
+            </div><!-- End .banner -->
+        </div><!-- End .col-lg-6 -->
+    </div><!-- End .row -->
+</div><!-- End .container -->
+@*Blog Yazılarımız*@
+
+<div class="blog-posts bg-light pt-4 pb-7">
+    <div class="container">
+        <h2 class="title text-center">BLOG YAZILARIMIZ</h2><!-- End .title-lg text-center -->
+
+        <div class="owl-carousel owl-simple" data-toggle="owl"
+             data-owl-options='{
+                            "nav": false,
+                            "dots": true,
+                            "items": 3,
+                            "margin": 20,
+                            "loop": false,
+                            "responsive": {
+                                "0": {
+                                    "items":1
+                                },
+                                "600": {
+                                    "items":2
+                                },
+                                "992": {
+                                    "items":3
+                                },
+                                "1280": {
+                                    "items":4,
+                                    "nav": true,
+                                    "dots": false
+                                }
+                            }
+                        }'>
+            @foreach (var item in ViewBag.Bloglar)
+            {
+
+                <article class="entry">
+                    <figure class="entry-media">
+                        <a href="single.html">
+                            <img src="@item.BlogResim" alt="image desc">
+                        </a>
+                    </figure><!-- End .entry-media -->
+
+                    <div class="entry-body">
+                        <div class="entry-meta">
+                            <p href="#">@item.BlogTarih</p>
+                        </div><!-- End .entry-meta -->
+
+                        <h3 class="entry-title">
+                            <a href="/Home/BlogDetay/@item.ID">@item.BlogAdi</a>
+                        </h3><!-- End .entry-title -->
+
+                        <div class="entry-content">
+                            <p>@item.BlogKisaAciklama</p>
+                            <a href="/Home/BlogDetay/@item.ID" class="read-more">Devamı..</a>
+                        </div><!-- End .entry-content -->
+                    </div><!-- End .entry-body -->
+                </article><!-- End .entry -->
+            }
+
+        </div><!-- End .owl-carousel -->
+    </div><!-- End .container -->
+</div><!-- End .blog-posts -->
+@*KAMPANYALAR 5*@
+
+<!--<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Content/assets/images/demos/demo-13/banners/banner-2.jpg" alt="Banner">
+                </a>
+
+                <div class="banner-content">
+                    <h4 class="banner-subtitle text-white d-none d-sm-block"><a href="#">Amazing Value</a></h4>--><!-- End .banner-subtitle -->
+                    <!--<h3 class="banner-title text-white"><a href="#">Clothes Trending <br>Spring Collection 2019 <br><span>from $12,99</span></a></h3>--><!-- End .banner-title -->
+                    <!--<a href="#" class="banner-link">Discover Now <i class="icon-long-arrow-right"></i></a>
+                </div>--><!-- End .banner-content -->
+            <!--</div>--><!-- End .banner -->
+        <!--</div>--><!-- End .col-lg-6 -->
+        <!--<div class="col-lg-6">
+            <div class="banner banner-overlay">
+                <a href="#">
+                    <img src="~/Content/assets/images/demos/demo-13/banners/banner-2.jpg" alt="Banner">
+                </a>
+
+                <div class="banner-content">
+                    <h4 class="banner-subtitle text-white d-none d-sm-block"><a href="#">Amazing Value</a></h4>--><!-- End .banner-subtitle -->
+                    <!--<h3 class="banner-title text-white"><a href="#">Clothes Trending <br>Spring Collection 2019 <br><span>from $12,99</span></a></h3>--><!-- End .banner-title -->
+                    <!--<a href="#" class="banner-link">Discover Now <i class="icon-long-arrow-right"></i></a>
+                </div>--><!-- End .banner-content -->
+            <!--</div>--><!-- End .banner -->
+        <!--</div>--><!-- End .col-lg-6 -->
+    <!--</div>--><!-- End .row -->
+<!--</div>--><!-- End .container -->
+
+
+
+
+<div class="modal fade text-start modal-success" id="SuccessCart" tabindex="-1" aria-labelledby="myModalLabel110" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel110">Başarılı</h5>
+                @*<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>*@
+            </div>
+            <div class="modal-body">
+                Ürün başarıyla sepete eklendi.
+            </div>
+            <div class="modal-footer">
+                <a href="/Home/Index" class="btn btn-success">Alışverişe devam et</a>
+                <a href="/Cart/Index/@Session["ID"]" class="btn btn-success">Sepete Git</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Adjs
+{
+    <script>
+
+
+
+
+        function AddCart(ID) {
+            /*var ID = $("#ProductID").val();*/
+            getValue("Cart/AddCart",
+                { ID: ID },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        $('#SuccessCart').modal('show');
+                    }
+                    else if (data.indexOf('Hata') > -1) {
+                        alert(data)
+                    }
+                });
+        };
+
+
+
+    </script>
+}

@@ -1,0 +1,194 @@
+﻿@model EvdeEczane.Models.Stok
+@{
+    ViewBag.Title = "StokDetay";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section id="input-group-basic">
+    <div class="row">
+        <!-- Basic -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Stok Ekle</h4>
+                </div>
+                <div class="card-body">
+                    <form action="~/StokAyarlari/UrunGuncelle" method="post" enctype="multipart/form-data">
+
+                        <label class="form-label">Stok Resmi</label>
+                        <div class="input-group mb-2">
+                            <div class="image-preview">
+                                <img class="img-responsive img-thumbnail" id="Resim" src="@Model.StokResim" style="width: 352px; height: 200px;" />
+                            </div>
+                        </div>
+                        <input type="text" name="ID" value="@Model.ID" hidden />
+                        <div class="input-group mb-2">
+                            <input type="file" id="SelectImage" style="display: none" name="StokResim" />
+                            <input type="button" class="btn btn-secondary waves-effect waves-float waves-light" value="Resim Ekle" id="AddImage" />
+                        </div>
+                        <label class="form-label">Stok Adı</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" placeholder="Stok Adi" name="StokAdi" value="@Model.StokAdi" aria-label="Stok Adi" />
+                        </div>
+                        <label class="form-label">Stok Kodu</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" placeholder="Stok Kodu" name="StokKodu" value="@Model.StokKodu" aria-label="Stok Kodu" />
+                        </div>
+                        <label class="form-label">Stok Barkodu</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" placeholder="Stok Barkodu" name="StokBarkod" value="@Model.StokBarkod" aria-label="Stok Barkodu" />
+                        </div>
+                        <label class="form-label">Stok Fiyatı</label>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">&#8378;</span>
+                            <input type="text" class="form-control" placeholder="100" name="StokFiyat" value="@Model.StokFiyat" aria-label="Amount (to the nearest dollar)" />
+                            <span class="input-group-text">.00</span>
+                        </div>
+                        <label class="form-label">Stok Adeti</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" name="StokBakiye" aria-label="1" value="@Model.StokBakiye" />
+                        </div>
+                        <label class="form-label">Stok Marka</label>
+                        <div class="input-group mb-2">
+                            @*@Html.DropDownListFor(model => model.CategoryID, (List<SelectListItem>)ViewBag.Categorys, new { @class = "form-control" })*@
+
+                            @Html.DropDownListFor(m => m.StokMarkaID, (List<SelectListItem>)ViewBag.Marka, new { @class = "form-control", @name = "StokMarkaID", @value = Model.Marka.MarkaAdi })
+                            @*<input type="hidden" name="StoreID" value="@Session["ID"]" />*@
+                        </div>
+                        <label class="form-label">Stok Kategorisi</label>
+                        <div class="input-group mb-2">
+                            @*@Html.DropDownListFor(model => model.CategoryID, (List<SelectListItem>)ViewBag.Categorys, new { @class = "form-control" })*@
+                            @Html.DropDownListFor(m => m.StokKategoriID, (List<SelectListItem>)ViewBag.AltKategori, new { @class = "form-control", @name = "StokKategoriID", @value = Model.Menuler.MenuAdi })
+                            @*<input type="hidden" name="StoreID" value="@Session["ID"]" />*@
+                        </div>
+                        <div class="input-group">
+                            <div class="form-check form-check-inline">
+                                <div class="mb-0">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="isTrend" id="isTrend" value="@Model.isTrend">
+                                        <label class="form-check-label" for="flexCheckDefault1">Trend</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <div class="form-check form-check-inline">
+                                <div class="mb-0">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="isYeni" id="isYeni" value="@Model.isYeni">
+                                        <label class="form-check-label" for="flexCheckDefault1">Yeni</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <div class="form-check form-check-inline">
+                                <div class="mb-0">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="isIndirim" id="isIndirim" value="@Model.isIndirim">
+                                        <label class="form-check-label" for="flexCheckDefault1">İndirimli</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="form-label">İndirimli Fiyat</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" placeholder="" value="@Model.IndirimliFiyat" name="IndirimliFiyat" id="IndirimliFiyat" disabled />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text">Stok Açıklaması</span>
+                            <textarea class="form-control" aria-label="With textarea" name="StokAciklama">@Model.StokAciklama</textarea>
+                        </div>
+                        @*<input type="hidden" name="ID" value="@Model.ID" />*@
+                        <div class="input-group">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Adjs{
+    <script>
+        $('#AddImage').click(function () {
+            $('#SelectImage').click();
+        });
+        $('#AddImage').click(function () {
+            var imgElement = $(this).find("img").first();
+            if (imgElement.length) {
+                var fullPath = imgElement.attr('src');
+                console.log(fullPath);
+            }
+        });
+        $("#isTrend").change(function () {
+            console.log($("#isTrend").val())
+            if ($(this).prop("checked")) {
+                $(this).val(true);
+            } else {
+                $(this).val(false);
+            }
+        });
+        $("#isYeni").change(function () {
+            if ($(this).prop("checked")) {
+                $(this).val(true);
+            } else {
+                $(this).val(false);
+            }
+        });
+        $("#isIndirim").change(function () {
+            if ($(this).prop("checked")) {
+                $(this).val(true);
+                $("#IndirimliFiyat").removeAttr('disabled');
+            } else {
+                $(this).val(false);
+                $("#IndirimliFiyat").attr('disabled', 'disabled');
+
+            }
+        });
+
+
+        $(function () {
+            jQuery.browser = {};
+            jQuery.browser.msie = false;
+            jQuery.browser.version = 0;
+            if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+                jQuery.browser.msie = true;
+                jQuery.browser.version = RegExp.$1;
+            }
+            $("#SelectImage").change(function () {
+                $(".image-preview").html("");
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                if (regex.test($(this).val().toLowerCase())) {
+                    if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                        $(".image-preview").show();
+                        $(".image-preview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                    }
+                    else {
+                        if (typeof (FileReader) != "undefined") {
+                            $(".image-preview").show();
+                            $(".image-preview").append("<img style= width:24.92rem;height:13.92rem;margin-top:50; />");
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                $(".image-preview img").attr("src", e.target.result);
+                            }
+                            reader.readAsDataURL($(this)[0].files[0]);
+                        } else {
+                            alert("This browser does not support FileReader.");
+                        }
+                    }
+                } else {
+                    alert("Please upload a valid image file.");
+                }
+            });
+        });
+
+
+
+    </script>
+}
+
+
+

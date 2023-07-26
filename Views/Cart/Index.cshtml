@@ -1,0 +1,201 @@
+﻿@model EvdeEczane.Models.Cart
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header text-center" style="background-image: url('~/Content/assets/images/page-header-bg.jpg')">
+    <div class="container">
+        <h1 class="page-title">Sepet</h1>
+    </div><!-- End .container -->
+</div><!-- End .page-header -->
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Home/Index">Anasayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="page-content">
+    <div class="cart">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <table class="table table-cart table-mobile">
+                        <thead>
+                            <tr>
+                                <th>Ürün</th>
+                                <th>Fiyat</th>
+                                <th>Adet</th>
+                                <th>Toplam</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (Model.Cartlines.Count > 0)
+                            {
+                                foreach (var item in Model.Cartlines)
+                                {
+                                    <tr>
+                                        <td class="product-col">
+                                            <div class="product">
+                                                <figure class="product-media">
+                                                    <a href="#">
+                                                        @if (item.Product.StokResim != null)
+                                                        {
+                                                            <img src="@item.Product.StokResim" alt="Product image">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/Resimler/StokResim/yok.png" alt="Product image">
+
+                                                        }
+
+                                                    </a>
+                                                </figure>
+
+                                                <h3 class="product-title">
+                                                    <a href="/StokDetay/StokDetay/@item.Product.ID">@item.Product.StokAdi</a>
+                                                </h3><!-- End .product-title -->
+                                            </div><!-- End .product -->
+                                        </td>
+                                        <td class="price-col">@((item.Product.StokFiyat * item.Quantity)) ₺</td>
+                                        <td class="quantity-col">
+                                            <div class="cart-product-quantity">
+                                                <input type="number" class="form-control" value="@item.Quantity"   data-decimals="0" disabled>
+                                            </div><!-- End .cart-product-quantity -->
+                                        </td>
+                                        <td class="total-col">@Model.Total() ₺</td>
+                                        <td class="remove-col"><button class="btn-remove" onclick="RemoveCart(@item.Product.ID)"><i class="icon-close"></i></button></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table><!-- End .table table-wishlist -->
+
+                    
+                </div><!-- End .col-lg-9 -->
+                <aside class="col-lg-3">
+                    <div class="summary summary-cart">
+                        <h3 class="summary-title">Sepet Toplam</h3><!-- End .summary-title -->
+
+                        <table class="table table-summary">
+                            <tbody>
+                                <tr class="summary-subtotal">
+                                    <td>Ara Toplam:</td>
+                                    <td>@Model.Total() TL</td>
+                                </tr><!-- End .summary-subtotal -->
+                                <tr class="summary-subtotal">
+                                    <td>Kargo Bedeli:</td>
+                                    <td>15 TL</td>
+                                </tr><!-- End .summary-subtotal -->
+
+
+
+
+                                <tr class="summary-total">
+                                    <td style="color: #ef3013">Total:</td>
+                                    <td style="color: #ef3013">@Model.Total() + 15 TL</td>
+                                </tr><!-- End .summary-total -->
+                            </tbody>
+                        </table><!-- End .table table-summary -->
+                        <input type="text" name="name" value="@Session["ID"]" hidden id="KullaniciID" />
+                        @if (Session["ID"] == null)
+                        {
+                            <a href="/Login/SiteLogin" class="btn btn-outline-primary-2 btn-order btn-block">Giriş Yap</a>
+                        }
+                        else
+                        {
+                            <a href="" class="btn btn-outline-primary-2 btn-order btn-block" onclick="SendOrder()">Satın Al</a>
+                        }
+
+                    </div><!-- End .summary -->
+
+                    <a href="/Home/Index" class="btn btn-outline-dark-2 btn-block mb-3"><span>Alışverişe Devam Et</span><i class="icon-refresh"></i></a>
+                </aside><!-- End .col-lg-3 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .cart -->
+</div><!-- End .page-content -->
+
+
+@section Adjs
+{
+    <script>
+        function RemoveCart(ID) {
+            getValue("Cart/RemoveCart",
+                { ID: ID },
+                function (data, err) {
+                    console.log(data);
+                    if (!data) {
+                        return;
+                    } else {
+                        window.location.href = '@Url.Action("Index","Cart")';
+                    }
+                })
+
+        };
+
+        @*function GetCart(ID) {
+            getValue("Cart/CartPartial",
+                { ID: ID },
+                function (data, err) {
+                    console.log(data);
+                    if (!data) {
+                        return;
+                    } else {
+                        window.location.href = '@Url.Action("Index","Cart")';
+                    }
+                })
+
+        };*@
+
+
+
+        function GetAddress(ID) {
+            getValue("Cart/GetAddress",
+                { ID:ID },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else {
+                        $('#GetAddressForm').html(data);
+                    }
+                })
+
+        };
+
+        function AddCredit() {
+            $('#AddCredit').modal('show');
+
+        };
+
+
+        function SendOrder() {
+            getValue("/Cart/SatinAl",
+                { UserID: $('#KullaniciID').val() },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        @*setTimeout(function () { window.location.replace("@Url.Action("Index","Home")"); }, 1400); // BAŞKA SAYFAYA GÖNDERME*@
+                        window.location.href = '@Url.Action("Index", "Siparisler")'
+                    }
+                    else if (data == 'Hata') {
+                        alert("Hata");
+                    }
+                    else if (data == 'Bos') {
+                        alert("Lütfen Bilgileri Doldurunuz");
+                    }
+                });
+        };
+
+
+    </script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script>
+
+}

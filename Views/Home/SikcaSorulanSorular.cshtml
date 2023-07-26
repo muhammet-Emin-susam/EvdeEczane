@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "SikcaSorulanSorular";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb" class="breadcrumb-nav mb-3" style="background-color:#fbfbfb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Home/Index">Anasayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Sayfalar</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Sıkça Sorulan Sorular</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="text-center">SIKÇA SORULAN SORULAR</h4>
+                <hr />
+                
+                <article class="entry">
+                    <div class="entry-body">
+                        <div class="entry-content">
+                            <p>
+                                @Html.Raw(ViewBag.SikcaSorulanSorular)
+                            </p>
+                        </div><!-- End .entry-content -->
+                    </div><!-- End .entry-body -->
+                </article><!-- End .entry -->
+
+            </div><!-- End .col-lg-9 -->
+
+
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .page-content -->

@@ -1,0 +1,47 @@
+﻿@using EvdeEczane.Models
+@model List<Bloglar>
+@{
+    ViewBag.Title = "Bloglar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content" style="margin-top:40px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                @foreach (var item in Model)
+                {
+                    <article class="entry entry-list">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <figure class="entry-media">
+                                    <a href="/Home/BlogDetay/@item.ID">
+                                        <img src="@item.BlogResim" alt="image desc" style="max-width:400px">
+                                    </a>
+                                </figure><!-- End .entry-media -->
+                            </div><!-- End .col-md-5 -->
+
+                            <div class="col-md-8">
+                                <div class="entry-body" style=" position: relative; margin-bottom: 156px;">
+                                    <h2 class="entry-title">
+                                        <a href="/Home/BlogDetay/@item.ID">@item.BlogAdi</a>
+                                    </h2><!-- End .entry-title -->
+                                    <div class="entry-content">
+                                        <p style="width: 350px; overflow: hidden; /* taşanları gizle */ white-space: nowrap; /* alt satıra hiç inme */ text-overflow: ellipsis; /* eğer uzunsa üç nokta koy */">@item.BlogKisaAciklama </p>
+
+
+                                    </div><!-- End .entry-content -->
+                                </div><!-- End .entry-body -->
+                                <p href="#" style="float:right">@item.BlogTarih</p>
+                                <a href="/Home/BlogDetay/@item.ID" class="btn btn-danger" target="_blank">Okumaya Devam Et</a>
+                            </div><!-- End .col-md-7 -->
+                        </div><!-- End .row -->
+                    </article><!-- End .entry -->
+                }
+
+            </div><!-- End .col-lg-9 -->
+
+            
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .page-content -->

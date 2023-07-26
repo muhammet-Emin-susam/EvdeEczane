@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Markalarimiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content" style="margin-top:55px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="products mb-3">
+                    <div class="row justify-content-center">
+                        <div class="container mb-5">
+                            <div class="row elements">
+                                @foreach (var item in ViewBag.Markalar)
+                                {
+                                    <div class="col-xl-5col col-lg-4 col-md-3 col-6">
+                                        <a href="/Home/MarkaDetay/@item.ID" class="element-type">
+                                            <div class="element">
+                                                <img src="@item.MarkaResim" alt="Alternate Text" />
+                                                <p>@item.MarkaAdi</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div><!-- End Elements list -->
+                    </div><!-- End .row -->
+                </div><!-- End .products -->
+
+
+            </div><!-- End .col-lg-9 -->
+            <aside class="col-lg-3 order-lg-first">
+                <div class="sidebar sidebar-shop">
+
+
+                    <div class="widget ">
+                        <h3 class="widget-title">
+                            <span class="text-danger">
+                                ÜRÜN GRUPLARI
+                            </span>
+                        </h3><!-- End .widget-title -->
+                        <hr />
+
+                        <div class="collapse show" id="widget-1">
+                            <div class="widget-body">
+                                <div class="filter-items filter-items-count">
+                                    @foreach (var item in ViewBag.Kategoriler)
+                                    {
+                                        <a href="/Kategoriler/Kategori/@item.ID" class="text-dark">
+                                            <div class="filter-item">
+
+                                                <div class="custom-control">
+                                                    <i class="icon-angle-right"></i>
+                                                    @item.MenuAdi
+
+                                                </div><!-- End .custom-checkbox -->
+                                            </div><!-- End .filter-item -->
+                                        </a>
+                                    }
+                                </div><!-- End .filter-items -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+
+                </div><!-- End .sidebar sidebar-shop -->
+            </aside><!-- End .col-lg-3 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .page-content -->

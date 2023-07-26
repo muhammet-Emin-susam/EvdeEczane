@@ -1,0 +1,83 @@
+﻿@using EvdeEczane.Models
+@model IEnumerable<EvdeEczane.Models.Menuler>
+<style>
+    ul.menu.sf-arrows.sf-js-enabled{
+        width:1475px
+    }
+</style>
+<div class="header-bottom sticky-header" style="background-color: #ef3013">
+    <div class="container">
+        <div class="header-left">
+            <div class="dropdown category-dropdown show is-on" data-visible="false">
+                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-display="static" title="Browse Categories">
+                    TÜM KATEGORİLER 
+                </a>
+
+                <div class="dropdown-menu ">
+                    <nav class="side-nav">
+                        <ul class="menu-vertical sf-arrows">
+                        @foreach (var item in Model.Where(x => x.ParentID == null && x.AltMenuID == null))
+                        {
+                           <li><a href="/Kategoriler/Kategori/@item.ID">@item.MenuAdi</a></li>
+                        }
+                        </ul><!-- End .menu-vertical -->
+                    </nav><!-- End .side-nav -->
+                </div><!-- End .dropdown-menu -->
+            </div><!-- End .category-dropdown -->
+        </div><!-- End .col-lg-3 -->
+        <div class="header-center">
+            <nav class="main-nav">
+                <ul class="menu sf-arrows">
+
+                @foreach (var item in Model.Where(x => x.ParentID == null && x.AltMenuID == null))
+                {
+                    <li>
+                        <a href="/Kategoriler/Kategori/@item.ID" class="sf-with-ul">@item.MenuAdi</a>
+
+                        <div class="megamenu megamenu-sm">
+                            <div class="row no-gutters">
+                            @foreach (var ParentMenu in Model.Where(x => x.ParentID == item.ID && x.ParentID != null))
+                            {
+                                <div class="col-md-6">
+                                    <div class="menu-col">
+                                        <div class="menu-title" style="font-size:19px"><a href="/Kategoriler/Kategori/@ParentMenu.ID"> @ParentMenu.MenuAdi</a></div><!-- End .menu-title -->
+                                        <ul>
+                                            @foreach (var KategoriBazli in Model.Where(x => x.AltMenuID == ParentMenu.ID && x.ParentID == null))
+                                            {
+                                                <li><a href="/Kategoriler/Kategori/@KategoriBazli.ID">@KategoriBazli.MenuAdi</a></li>
+                                            }
+
+
+                                        </ul>
+                                    </div><!-- End .menu-col -->
+                                </div><!-- End .col-md-6 -->
+                            }
+                                <!--<div class="col-md-6">
+                                    <div class="banner banner-overlay">
+                                        <a href="category.html">
+                                            <img src="~/Content/assets/images/menu/banner-2.jpg" alt="Banner">
+
+                                            <div class="banner-content banner-content-bottom">
+                                                <div class="banner-title text-white">New Trends<br><span><strong>spring 2019</strong></span></div>--><!-- End .banner-title -->
+                                            <!--</div>--><!-- End .banner-content -->
+                                        <!--</a>
+                                    </div>--><!-- End .banner -->
+                                <!--</div>--><!-- End .col-md-6 -->
+                            </div><!-- End .row -->
+                        </div><!-- End .megamenu megamenu-sm -->
+
+                    </li>
+                }
+                <li>
+                    <a href="/Kategoriler/Kategori/" class="sf-with-ul" style="background-color: #8AC934">Kampanyalar</a>
+                </li>
+                <li>
+                    <a href="/Kategoriler/Kategori/" class="sf-with-ul" style="background-color: #B947FF">Avantajlı Setler</a>
+                </li>  
+                </ul><!-- End .menu -->
+            </nav><!-- End .main-nav -->
+        </div><!-- End .col-lg-9 -->
+        
+    </div><!-- End .container -->
+</div><!-- End .header-bottom -->
+        

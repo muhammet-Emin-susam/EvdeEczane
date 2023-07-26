@@ -1,0 +1,92 @@
+﻿@model EvdeEczane.Models.Cart
+<div class="dropdown cart-dropdown">
+    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+        <i class="icon-shopping-cart"></i>
+        @if (Model.Cartlines.Count > 0)
+        {
+            <span class="cart-count">@(Model.Cartlines.Count)</span>
+        }
+        else
+        {
+            <span class="cart-count" hidden></span>
+        }
+
+        <span class="cart-txt">Sepet</span>
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-right">
+        <div class="dropdown-cart-products">
+        @if (Model.Cartlines.Count != 0)
+        {
+            foreach (var item in Model.Cartlines)
+            {
+
+            <div class="product">
+                <div class="product-cart-details">
+                    <h4 class="product-title">
+                        <a href="/StokDetay/StokDetay/@item.Product.ID">@item.Product.StokAdi</a>
+                    </h4>
+
+                    <span class="cart-product-info">
+                        <span class="cart-product-qty">@item.Quantity</span>
+                        x @item.Product.StokFiyat
+                    </span>
+                </div><!-- End .product-cart-details -->
+
+                <figure class="product-image-container">
+                    <a href="/StokDetay/StokDetay/@item.Product.ID" class="product-image">
+                        @if (item.Product.StokResim != null)
+                        {
+                            <img src="@item.Product.StokResim" alt="product">
+                        }
+                        else
+                        {
+                            <img src="~/Resimler/StokResim/yok.png" alt="product">
+                        }
+
+                    </a>
+                </figure>
+                <a href="#" class="btn-remove" title="Remove Product" onclick="RemoveCart(@item.Product.ID)"><i class="icon-close"></i></a>
+            </div><!-- End .product -->
+            }
+        }
+        else
+        {
+            <div class="alert alert-danger mt-1 alert-validation-msg" role="alert">
+                    <div class="alert-body d-flex align-items-center">
+                        <i data-feather="info" class="me-50"></i>
+                        <span>Sepetinizde Ürün Bulunmamaktadır.</span>
+                    </div>
+                </div>
+        }
+        </div><!-- End .cart-product -->
+
+        <div class="dropdown-cart-total">
+            <span>Total</span>
+
+            <span class="cart-total-price">@Model.Total() TL</span>
+        </div><!-- End .dropdown-cart-total -->
+
+        <div class="dropdown-cart-action" style="float:right">
+            <a href="/Cart/Index" class="btn btn-primary">Sepete Git</a>
+        </div><!-- End .dropdown-cart-total -->
+    </div><!-- End .dropdown-menu -->
+</div><!-- End .cart-dropdown -->
+
+
+
+<script>
+function RemoveCart(ID) {
+            getValue("Cart/RemoveCart",
+                { ID: ID },
+                function (data, err) {
+                    console.log(data);
+                    if (!data) {
+                        return;
+                    } else {
+                        window.location.href = '@Url.Action("Index","Cart")';
+                    }
+                })
+
+        };
+</script>

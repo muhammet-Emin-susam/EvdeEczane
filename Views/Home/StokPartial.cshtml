@@ -1,0 +1,53 @@
+﻿@using EvdeEczane.Models
+@model IEnumerable<Stok>
+<div class="row justify-content-center">
+    @foreach (var item in Model)
+    {
+        <div class="col-6 col-md-4 col-lg-4">
+            <div class="product product-7 text-center">
+                <figure class="product-media">
+                    @if (item.isTrend == true && item.isYeni == null)
+                    {
+                        <span class="product-label label-new">TREND</span>
+                    }
+
+                    @if (item.isIndirim == true)
+                    {
+                        <span class="product-label label-new">İNDİRİM</span>
+                    }
+                    @if (item.isYeni == true)
+                    {
+                        <span class="product-label label-new">YENİ</span>
+                    }
+
+                    <a href="/StokDetay/StokDetay/@item.ID">
+                        <img src="@item.StokResim" alt="Product image" class="product-image" style="min-height:240px">
+                    </a>
+                    <div class="product-action">
+                        @if (item.StokBakiye != 0)
+                        {
+                            <a href="" class="btn-product" onclick="AddCart(@item.ID)"><span>SEPETE EKLE</span></a>
+                        }
+                        else
+                        {
+                            <a href="javascript:void" class="btn-product"><span>STOKTA YOK</span></a>
+                        }
+                    </div><!-- End .product-action -->
+                </figure><!-- End .product-media -->
+
+                <div class="product-body">
+                    <div class="product-cat">
+                        <a href="#">@item.Marka.MarkaAdi</a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title"><a href="/StokDetay/StokDetay/@item.ID">@item.StokAdi</a></h3><!-- End .product-title -->
+                    <div class="product-price">
+                        @item.StokFiyat TL
+                    </div><!-- End .product-price -->
+                </div><!-- End .product-body -->
+            </div><!-- End .product -->
+        </div><!-- End .col-sm-6 col-lg-4 -->
+    }
+
+
+
+</div><!-- End .row -->

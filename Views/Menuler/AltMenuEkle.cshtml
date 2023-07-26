@@ -1,0 +1,62 @@
+﻿@model EvdeEczane.Models.Menuler
+@{
+    ViewBag.Title = "AltMenuEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section id="input-group-basic">
+    <div class="row">
+        <!-- Basic -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Alt Menu Ekle</h4>
+                </div>
+                <div class="card-body">
+                    <label class="form-label">Alt Menu Adı</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Alt Menu Adı" aria-label="Alt Menu Adi" id="AltMenuAdi" />
+                    </div>
+                    <label class="form-label">Menu</label>
+                    <div class="input-group mb-2">
+                        @Html.DropDownListFor(m => m.ID, (List<SelectListItem>)ViewBag.Menu, new { @class = "form-control", @id = "Menu" })
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Alt Menu Açıklaması</span>
+                        <textarea class="form-control" aria-label="With textarea" id="AltMenuAciklamasi"></textarea>
+                    </div>
+                    @*<input type="hidden" name="ID" value="@Model.ID" />*@
+                    <div class="input-group" style="margin-top:10px">
+                        <button class="btn btn-primary" type="button" onclick="AltMenuEkle()">Kaydet</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Adjs{
+    <script>
+        function AltMenuEkle() {
+            getValue("Menuler/AltMenuEklee",
+                 { AltMenuAdi: $("#AltMenuAdi").val(), AltMenuAciklamasi: $("#AltMenuAciklamasi").val(), Menu: $("#Menu").val() },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        location.href = '@Url.Action("Menuler", "Menuler")';
+                    }
+                    else if (data.indexOf('Hata') > -1) {
+                        alert(data)
+                    }
+                });
+        };
+    </script>
+}
+
+
+
+
+
+

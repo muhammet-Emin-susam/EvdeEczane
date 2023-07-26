@@ -1,0 +1,108 @@
+﻿@model EvdeEczane.Models.Bilgiler
+@{
+    ViewBag.Title = "SiteBilgileri";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section id="input-group-basic">
+    <div class="row">
+        <!-- Basic -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Site Bilgileri</h4>
+                </div>
+                <div class="card-body">
+                    <form action="~/SiteAyarlari/SiteBilgileriGuncelle" method="post" enctype="multipart/form-data">
+
+                        <label class="form-label">Logo</label>
+                        <div class="input-group mb-2">
+                            <div class="image-preview">
+                                <img class="img-responsive img-thumbnail" id="Resim" src="@Model.SiteLogo" style="width: 352px; height: 200px;" />
+                            </div>
+                        </div>
+                        <div class="input-group mb-2">
+                            <input type="file" id="SelectImage" style="display: none" name="SiteLogo" />
+                            <input type="button" class="btn btn-secondary waves-effect waves-float waves-light" value="Resim Ekle" id="AddImage" />
+                        </div>
+                        <label class="form-label">Site Tel</label>
+                        <div class="input-group mb-2">
+                            <input type="tel" class="form-control" placeholder="Site Tel" name="SiteTel" value="@Model.SiteTel" aria-label="Stok Adi" />
+                        </div>
+                        <label class="form-label">Firma Adı</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" placeholder="Firma Adı" name="FirmaAdi" value="@Model.FirmaAdi" aria-label="Firma Adı" />
+                        </div>
+                        <label class="form-label">Site Email</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" placeholder="Site Email" name="SiteEmail" aria-label="Site Email" value="@Model.SiteEmail"/>
+                        </div>
+                        <label class="form-label">Site İnstagram</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" name="SiteInstagram" aria-label="Site İnstagram" value="@Model.SiteInstagram"/>
+                        </div>
+                       
+                        
+                        @*<input type="hidden" name="ID" value="@Model.ID" />*@
+                        <div class="input-group">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Adjs{
+    <script>
+        $('#AddImage').click(function () {
+            $('#SelectImage').click();
+        });
+        $('#AddImage').click(function () {
+            var imgElement = $(this).find("img").first();
+            if (imgElement.length) {
+                var fullPath = imgElement.attr('src');
+                console.log(fullPath);
+            }
+        });
+
+
+        $(function () {
+            jQuery.browser = {};
+            jQuery.browser.msie = false;
+            jQuery.browser.version = 0;
+            if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+                jQuery.browser.msie = true;
+                jQuery.browser.version = RegExp.$1;
+            }
+            $("#SelectImage").change(function () {
+                $(".image-preview").html("");
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                if (regex.test($(this).val().toLowerCase())) {
+                    if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                        $(".image-preview").show();
+                        $(".image-preview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                    }
+                    else {
+                        if (typeof (FileReader) != "undefined") {
+                            $(".image-preview").show();
+                            $(".image-preview").append("<img style= width:24.92rem;height:13.92rem;margin-top:50; />");
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                $(".image-preview img").attr("src", e.target.result);
+                            }
+                            reader.readAsDataURL($(this)[0].files[0]);
+                        } else {
+                            alert("This browser does not support FileReader.");
+                        }
+                    }
+                } else {
+                    alert("Please upload a valid image file.");
+                }
+            });
+        });
+    </script>
+    }

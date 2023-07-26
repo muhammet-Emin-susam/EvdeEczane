@@ -1,0 +1,45 @@
+﻿@model EvdeEczane.Models.Bilgiler
+@{
+    ViewBag.Title = "Hakkimizda";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<section id="input-group-basic">
+    <div class="row">
+        <!-- Basic -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Hakkımızda</h4>
+                </div>
+                <div class="card-body">
+                        <div class="input-group">
+                            <textarea name="comments" id="Hakkimizda" rows="20"  class="form-control ps-5" placeholder="Hakkımızda Yazısı :">@Model.SiteHakkimizda</textarea>
+                        </div>
+                        <div class="input-group" style="margin-top:15px;">
+                            <button class="btn btn-primary" type="submit" onclick="HakkimizdaGuncelle()">Kaydet</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Adjs{
+    <script>
+        function HakkimizdaGuncelle() {
+             getValue("SiteAyarlari/HakkimizdaGuncelle",
+                 { Hakkimizda: $("#Hakkimizda").val() },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        location.href = '@Url.Action("Hakkimizda", "SiteAyarlari")';
+                    }
+                    else if (data.indexOf('Hata') > -1) {
+                        alert(data)
+                    }
+                });
+        };
+    </script>
+    }
+

@@ -1,0 +1,575 @@
+﻿@model EvdeEczane.Models.Menuler
+@{
+    ViewBag.Title = "Kategori";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header text-center" style="background-image: url('~/Content/assets/images/page-header-bg.jpg')">
+    <div class="container electronics">
+        <div class="heading  heading-border mb-3">
+            <div class="heading-left">
+                <h2 class="title text-center mb-2">KATEGORİNİN EN ÇOK SATANLARI</h2><!-- End .title -->
+            </div><!-- End .heading-left -->
+
+
+        </div><!-- End .heading -->
+
+        <div class="tab-content tab-content-carousel">
+            <div class="tab-pane p-0 fade show active" id="elec-new-tab" role="tabpanel" aria-labelledby="elec-new-link">
+                <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+                     data-owl-options='{
+                                "nav": false,
+                                "dots": true,
+                                "margin": 20,
+                                "loop": false,
+                                "responsive": {
+                                    "0": {
+                                        "items":2
+                                    },
+                                    "480": {
+                                        "items":2
+                                    },
+                                    "768": {
+                                        "items":3
+                                    },
+                                    "992": {
+                                        "items":4
+                                    },
+                                    "1280": {
+                                        "items":5,
+                                        "nav": true
+                                    }
+                                }
+                            }'>
+                    @foreach (var item in ViewBag.encok)
+                    {
+
+
+                        <div class="product">
+                            <figure class="product-media">
+                                <span class="product-label label-new">ÇOK SATANLAR</span>
+                                @if (item.isYeni == true)
+                                {
+                                    <span class="product-label label-new">YENİ</span>
+                                }
+                                @if (item.isTrend == true)
+                                {
+                                    <span class="product-label label-new">TREND</span>
+                                }
+                                <a href="/StokDetay/StokDetay/@item.ID">
+                                    <img src="@item.StokResim" alt="Product image" class="product-image">
+                                </a>
+
+                                <!--<div class="product-action-vertical">
+                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                                </div>-->
+                                <!-- End .product-action-vertical -->
+
+                                <div class="product-action">
+                                    @if (item.StokBakiye != 0)
+                                    {
+                                        <a href="" class="btn-product" onclick="AddCart(@item.ID)"><span>SEPETE EKLE</span></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="javascript:void" class="btn-product"><span>STOKTA YOK</span></a>
+                                    }
+                                </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
+
+                            <div class="product-body">
+
+                                <h3 class="product-title"><a href="/StokDetay/StokDetay/@item.ID">@item.StokAdi</a></h3><!-- End .product-title -->
+                                <div class="product-price text-center" style="margin-top:10px;margin-left:52px">
+                                    @item.StokFiyat TL
+                                </div><!-- End .product-price -->
+
+                            </div><!-- End .product-body -->
+                        </div><!-- End .product -->
+
+                    }
+                </div><!-- End .owl-carousel -->
+            </div><!-- .End .tab-pane -->
+
+        </div><!-- End .tab-content -->
+    </div>
+</div><!-- End .page-header -->
+<nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Home/Index">Anasayfa</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.MenuAdi</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+<input type="text" name="name" value="@Model.ID" hidden id="IDD" />
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="toolbox">
+                    <div class="toolbox-left">
+                        <div class="toolbox-info">
+                            Toplam <span>@ViewBag.StokSayisi</span> Ürün
+                        </div><!-- End .toolbox-info -->
+                    </div><!-- End .toolbox-left -->
+
+                    <div class="toolbox-right">
+                        <div class="toolbox-sort">
+                            <label for="sortby">Sırala:</label>
+                            <div class="select-custom">
+                                <select name="sortby" id="sortby" class="form-control">
+                                    <option value="popularity" selected="selected">Seçiniz</option>
+                                    <option value="a-z">İsme göre Sırala</option>
+                                    <option value="arfiyat">Fiyata Göre Sırala</option>
+                                </select>
+                            </div>
+                        </div><!-- End .toolbox-sort -->
+
+                    </div><!-- End .toolbox-right -->
+                </div><!-- End .toolbox -->
+
+                <div class="products mb-3" id="StokGelecek">
+
+                </div><!-- End .products -->
+            </div><!-- End .col-lg-9 -->
+            <aside class="col-lg-3 order-lg-first">
+                <div class="sidebar sidebar-shop">
+
+
+                    <div class="widget widget-collapsible">
+                        <h3 class="widget-title">
+                            <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
+                                Markalar
+                            </a>
+                        </h3><!-- End .widget-title -->
+
+                        <div class="collapse show" id="widget-1">
+                            <div class="widget-body">
+                                <div class="filter-items filter-items-count">
+                                    @foreach (var item in ViewBag.Marka)
+                                    {
+
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="cat-1">
+                                                <label class="custom-control-label" for="cat-1">@item.MarkaAdi</label>
+                                            </div><!-- End .custom-checkbox -->
+
+                                        </div><!-- End .filter-item -->
+                                    }
+
+                                </div><!-- End .filter-items -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+
+                    <div class="widget widget-collapsible">
+                        <h3 class="widget-title">
+                            <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
+                                Filtre Seçenekleri
+                            </a>
+                        </h3><!-- End .widget-title -->
+
+                        <div class="collapse show" id="widget-2">
+                            <div class="widget-body">
+                                <div class="filter-items">
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="size-1">
+                                            <label class="custom-control-label" for="size-1">Trend Ürünler</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="size-2">
+                                            <label class="custom-control-label" for="size-2">Yeni Ürünler</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="size-3">
+                                            <label class="custom-control-label" for="size-3">İndirimli Ürünler</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+                                </div><!-- End .filter-items -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+
+
+
+                    <div class="widget widget-collapsible">
+                        <h3 class="widget-title">
+                            <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
+                                Tüm Fiyat Aralıkları
+                            </a>
+                        </h3><!-- End .widget-title -->
+
+                        <div class="collapse show" id="widget-4">
+                            <div class="widget-body">
+                                <div class="filter-items">
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-1">
+                                            <label class="custom-control-label" for="brand-1">1 TL - 50 TL</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-2">
+                                            <label class="custom-control-label" for="brand-2">51 TL - 100 TL</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-3">
+                                            <label class="custom-control-label" for="brand-3">101 TL - 150 TL</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-4">
+                                            <label class="custom-control-label" for="brand-4">151 TL - 250 TL</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-5">
+                                            <label class="custom-control-label" for="brand-5">251 TL - 400 TL</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-6">
+                                            <label class="custom-control-label" for="brand-6">401 TL - 2000 TL</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+                                <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-7">
+                                            <label class="custom-control-label" for="brand-7">2000 TL +</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+
+
+                                </div><!-- End .filter-items -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+
+
+                </div><!-- End .sidebar sidebar-shop -->
+            </aside><!-- End .col-lg-3 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .page-content -->
+
+<div class="modal fade text-start modal-success" id="SuccessCart" tabindex="-1" aria-labelledby="myModalLabel110" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel110">Başarılı</h5>
+                @*<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>*@
+            </div>
+            <div class="modal-body">
+                Ürün başarıyla sepete eklendi.
+            </div>
+            <div class="modal-footer">
+                <a href="/Home/Index" class="btn btn-success">Alışverişe devam et</a>
+                <a href="/Cart/Index/@Session["ID"]" class="btn btn-success">Sepete Git</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Adjs{
+    <script>
+        @*$('#size-2').change(function () {
+            if (this.checked) {
+               function IndirimliUrunler() {
+                   getValue("Kategoriler/Kategori",
+                 { Indirimli: "true" },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        location.href = '@Url.Action("Kategori", "Kategoriler")';
+                    }
+                    else if (data.i ndexOf('Hata') > -1) {
+                        alert(data)
+                    }
+                });
+        };
+            }
+
+        });*@
+        $('#size-1').on('change', function () { // on change of state
+            if (this.checked) // if changed state is "CHECKED"
+            {
+                var trend = "trend";
+                var ID = $("#IDD").val();
+                var text = $("#sortby").val();
+                getValue("Kategoriler/Partial",
+                    { text: text, kategoriID: ID, trend: trend },
+                    function (data, err) {
+                        if (!data) {
+                            return;
+                        } else {
+                            $('#StokGelecek').html(data);
+                        }
+                    });
+            } else {
+                location.href = location.href;
+            }
+        })
+        $('#size-2').on('change', function () { // on change of state
+            if (this.checked) // if changed state is "CHECKED"
+            {
+                var trend = "yeni";
+                var ID = $("#IDD").val();
+                var text = $("#sortby").val();
+                getValue("Kategoriler/Partial",
+                    { text: text, kategoriID: ID, trend: trend },
+                    function (data, err) {
+                        if (!data) {
+                            return;
+                        } else {
+                            $('#StokGelecek').html(data);
+                        }
+                    });
+            } else {
+                location.href = location.href;
+            }
+        })
+        $('#size-3').on('change', function () { // on change of state
+            if (this.checked) // if changed state is "CHECKED"
+            {
+                var trend = "indirimli";
+                var ID = $("#IDD").val();
+                var text = $("#sortby").val();
+                getValue("Kategoriler/Partial",
+                    { text: text, kategoriID: ID, trend: trend },
+                    function (data, err) {
+                        if (!data) {
+                            return;
+                        } else {
+                            $('#StokGelecek').html(data);
+                        }
+                    });
+            } else {
+
+                location.href = location.href;
+            }
+        })
+        $('#brand-1').on('change', function () { // on change of state
+            if (this.checked) // if changed state is "CHECKED"
+            {
+                var aralik = "1-50";
+                var ID = $("#IDD").val();
+                var text = $("#sortby").val();
+                getValue("Kategoriler/Partial",
+                    { text: text, kategoriID: ID, aralik: aralik },
+                    function (data, err) {
+                        if (!data) {
+                            return;
+                        } else {
+                            $('#StokGelecek').html(data);
+                        }
+                    });
+            } else {
+
+                location.href = location.href;
+            }
+        })
+        $('#brand-2').on('change', function () { // on change of state
+            if (this.checked) // if changed state is "CHECKED"
+            {
+                var aralik = "51-100";
+                var ID = $("#IDD").val();
+                var text = $("#sortby").val();
+                getValue("Kategoriler/Partial",
+                    { text: text, kategoriID: ID, aralik: aralik },
+                    function (data, err) {
+                        if (!data) {
+                            return;
+                        } else {
+                            $('#StokGelecek').html(data);
+                        }
+                    });
+            } else {
+
+                location.href = location.href;
+            }
+        })
+        $('#brand-3').on('change', function () { // on change of state
+            if (this.checked) // if changed state is "CHECKED"
+            {
+                var aralik = "101-150";
+                var ID = $("#IDD").val();
+                var text = $("#sortby").val();
+                getValue("Kategoriler/Partial",
+                    { text: text, kategoriID: ID, aralik: aralik },
+                    function (data, err) {
+                        if (!data) {
+                            return;
+                        } else {
+                            $('#StokGelecek').html(data);
+                        }
+                    });
+            } else {
+
+                location.href = location.href;
+            }
+        })
+        $('#brand-4').on('change', function () { // on change of state
+            if (this.checked) // if changed state is "CHECKED"
+            {
+                var aralik = "151-250";
+                var ID = $("#IDD").val();
+                var text = $("#sortby").val();
+                getValue("Kategoriler/Partial",
+                    { text: text, kategoriID: ID, aralik: aralik },
+                    function (data, err) {
+                        if (!data) {
+                            return;
+                        } else {
+                            $('#StokGelecek').html(data);
+                        }
+                    });
+            } else {
+
+                location.href = location.href;
+            }
+        })
+        $('#brand-5').on('change', function () { // on change of state
+            if (this.checked) // if changed state is "CHECKED"
+            {
+                var aralik = "251-400";
+                var ID = $("#IDD").val();
+                var text = $("#sortby").val();
+                getValue("Kategoriler/Partial",
+                    { text: text, kategoriID: ID, aralik: aralik },
+                    function (data, err) {
+                        if (!data) {
+                            return;
+                        } else {
+                            $('#StokGelecek').html(data);
+                        }
+                    });
+            } else {
+
+                location.href = location.href;
+            }
+        })
+        $('#brand-6').on('change', function () { // on change of state
+            if (this.checked) // if changed state is "CHECKED"
+            {
+                var aralik = "401-2000";
+                var ID = $("#IDD").val();
+                var text = $("#sortby").val();
+                getValue("Kategoriler/Partial",
+                    { text: text, kategoriID: ID, aralik: aralik },
+                    function (data, err) {
+                        if (!data) {
+                            return;
+                        } else {
+                            $('#StokGelecek').html(data);
+                        }
+                    });
+            } else {
+
+                location.href = location.href;
+            }
+        })
+        $('#brand-7').on('change', function () { // on change of state
+            if (this.checked) // if changed state is "CHECKED"
+            {
+                var aralik = "2000+";
+                var ID = $("#IDD").val();
+                var text = $("#sortby").val();
+                getValue("Kategoriler/Partial",
+                    { text: text, kategoriID: ID, aralik: aralik },
+                    function (data, err) {
+                        if (!data) {
+                            return;
+                        } else {
+                            $('#StokGelecek').html(data);
+                        }
+                    });
+            } else {
+
+                location.href = location.href;
+            }
+        })
+        $(document).ready(function () {
+            var ID = $("#IDD").val();
+            var text = $("#sortby").val();
+            getValue("Kategoriler/Partial",
+                { text: text, kategoriID: ID },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else {
+                        $('#StokGelecek').html(data);
+                    }
+                });
+        })
+        
+            $("#sortby").change(function () {
+                var ID = $("#IDD").val();
+                var text = $("#sortby").val();
+                getValue("Kategoriler/Partial",
+                    { text: text, kategoriID: ID },
+                    function (data, err) {
+                        if (!data) {
+                            return;
+                        } else {
+                            $('#StokGelecek').html(data);
+                        }
+                    });
+            })
+        
+
+        //$(".filter-item").change(function () {
+        //    var ID = $("#IDD").val();
+        //    var text = $("#sortby").val();
+        //    getValue("Kategoriler/Partial",
+        //        { text: text, kategoriID: ID },
+        //        function (data, err) {
+        //            if (!data) {
+        //                return;
+        //            } else {
+        //                $('#StokGelecek').html(data);
+        //            }
+        //        });
+        //})
+
+        function AddCart(ID) {
+            /*var ID = $("#ProductID").val();*/
+            getValue("Cart/AddCart",
+                { ID: ID },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        $('#SuccessCart').modal('show');
+                    }
+                    else if (data.indexOf('Hata') > -1) {
+                        alert(data)
+                    }
+                });
+        };
+    </script>
+}
+

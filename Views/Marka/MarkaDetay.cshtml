@@ -1,0 +1,102 @@
+﻿@model EvdeEczane.Models.Marka
+@{
+    ViewBag.Title = "MarkaDetay";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section id="input-group-basic">
+    <div class="row">
+        <!-- Basic -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Marka Güncelle</h4>
+                </div>
+                <div class="card-body">
+                    <form action="~/Marka/MarkaGuncelle" method="post" enctype="multipart/form-data">
+
+                        <label class="form-label">Marka Resmi</label>
+                        <div class="input-group mb-2">
+                            <div class="image-preview">
+                                <img class="img-responsive img-thumbnail" id="Resim" src="@Model.MarkaResim" style="width: 352px; height: 200px;" />
+                            </div>
+                        </div>
+                        <div class="input-group mb-2">
+                            <input type="file" id="SelectImage" style="display: none" name="MarkaResim" />
+                            <input type="button" class="btn btn-secondary waves-effect waves-float waves-light" value="Resim Ekle" id="AddImage" />
+                        </div>
+                        <label class="form-label">Marka Adı</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" placeholder="Marka Adı" name="MarkaAdi" aria-label="Marka Adi" value="@Model.MarkaAdi" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text">Marka Açıklaması</span>
+                            <textarea class="form-control" aria-label="With textarea" name="MarkaAciklama">@Model.MarkaAciklama</textarea>
+                        </div>
+                        <input type="hidden" name="ID" value="@Model.ID" />
+                        <div class="input-group">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Adjs{
+    <script>
+        $('#AddImage').click(function () {
+            $('#SelectImage').click();
+        });
+        $('#AddImage').click(function () {
+            var imgElement = $(this).find("img").first();
+            if (imgElement.length) {
+                var fullPath = imgElement.attr('src');
+                console.log(fullPath);
+            }
+        });
+
+
+
+        $(function () {
+            jQuery.browser = {};
+            jQuery.browser.msie = false;
+            jQuery.browser.version = 0;
+            if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+                jQuery.browser.msie = true;
+                jQuery.browser.version = RegExp.$1;
+            }
+            $("#SelectImage").change(function () {
+                $(".image-preview").html("");
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                if (regex.test($(this).val().toLowerCase())) {
+                    if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                        $(".image-preview").show();
+                        $(".image-preview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                    }
+                    else {
+                        if (typeof (FileReader) != "undefined") {
+                            $(".image-preview").show();
+                            $(".image-preview").append("<img style= width:24.92rem;height:13.92rem;margin-top:50; />");
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                $(".image-preview img").attr("src", e.target.result);
+                            }
+                            reader.readAsDataURL($(this)[0].files[0]);
+                        } else {
+                            alert("This browser does not support FileReader.");
+                        }
+                    }
+                } else {
+                    alert("Please upload a valid image file.");
+                }
+            });
+        });
+    </script>
+}
+
+
+
+

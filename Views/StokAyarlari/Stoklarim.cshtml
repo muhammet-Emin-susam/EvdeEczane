@@ -1,0 +1,83 @@
+﻿@using EvdeEczane.Models
+@model List<Stok> 
+@{
+    ViewBag.Title = "Stoklarim";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row mt-4">
+    <div class="col-12">
+        <h5 class="mb-0">Stoklar</h5>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-2 row-cols-1">
+    @foreach (var item in Model)
+    {
+        <div class="col mt-4">
+            <div class="card shop-list border-0 overflow-hidden rounded">
+                    <ul class="label list-unstyled mb-0">
+                        @if (item.isTrend == true)
+                        {
+                            <li><a href="javascript:void(0)" class="badge badge-link rounded-pill bg-primary">Trend</a></li>
+                        }
+                        @if (item.isYeni == true)
+                        {
+                            <li><a href="javascript:void(0)" class="badge badge-link rounded-pill bg-warning">Yeni</a></li>
+                        }
+                        @if (item.isIndirim == true)
+                        {
+                            <li><a href="javascript:void(0)" class="badge badge-link rounded-pill bg-success">İndirimli</a></li>
+                        }
+
+
+                    </ul>
+                    <div class="shop-image position-relative overflow-hidden">
+                        <a href="/StokAyarlari/StokDetay/@item.ID"><img src="@item.StokResim" class="img-fluid" alt=""></a>
+                        @*<a href="product-detail.html" class="overlay-work">
+                <img src="~/AdminContent/assets/images/shop/product/s-1.jpg" class="img-fluid" alt="">
+            </a>*@
+
+                    </div>
+                    <div class="card-body content p-3 border-top">
+                        <a href="/StokAyarlari/StokDetay/@item.ID" class="text-dark product-name h6">@item.StokAdi</a>
+                        <div class="d-flex justify-content-between mt-1">
+                            @if (item.isIndirim == true)
+                            {
+                                <del><h6 class="text-dark small fst-italic mb-0 mt-1">@item.StokFiyat</h6></del>
+                                <h6 class="text-dark small fst-italic mb-0 mt-1">@item.IndirimliFiyat</h6>
+                            }
+                            else
+                            {
+                                <h6 class="text-dark small fst-italic mb-0 mt-1">@item.StokFiyat</h6>
+                            }
+
+
+                        </div>
+                    </div>
+                    <input type="button" class="btn btn-danger" name="name" value="Stok Sil" onclick="StokSil(@item.ID)" />
+            </div>
+        </div><!--end col-->
+    }
+</div><!--end row-->
+
+@section Adjs{
+    <script>
+
+         function StokSil(ID) {
+             getValue("StokAyarlari/StokSil",
+                { ID: ID},
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        location.href = '@Url.Action("Stoklarim", "StokAyarlari")';
+                    }
+                    else if (data.indexOf('Hata') > -1) {
+                        alert(data)
+                    }
+                });
+        };
+    </script>
+}

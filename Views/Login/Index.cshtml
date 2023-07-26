@@ -1,0 +1,151 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Landrick - Admin Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Bootstrap 5 Landing Page Template" />
+    <meta name="keywords" content="Saas, Software, multi-uses, HTML, Clean, Modern" />
+    <meta name="author" content="Shreethemes" />
+    <meta name="email" content="support@shreethemes.in" />
+    <meta name="website" content="https://shreethemes.in" />
+    <meta name="Version" content="v4.3.0" />
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="~/AdminContent/assets/images/favicon.ico" />
+    <!-- Css -->
+    <link href="~/AdminContent/assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
+    <!-- Bootstrap Css -->
+    <link href="~/AdminContent/assets/css/bootstrap.min.css" class="theme-opt" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="~/AdminContent/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/AdminContent/assets/libs/iconscout/unicons/css/line.css" type="text/css" rel="stylesheet" />
+    <!-- Style Css-->
+    <link href="~/AdminContent/assets/css/style.min.css" class="theme-opt" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <!-- Loader -->
+    <!-- <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Loader -->
+    <!-- Hero Start -->
+    <section class="cover-user">
+        <div class="container-fluid px-0">
+            <div class="row g-0 position-relative">
+                <div class="col-lg-4 cover-my-30 order-2">
+                    <div class="cover-user-img d-flex align-items-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card login-page border-0" style="z-index: 1">
+                                    <div class="card-body p-0">
+                                        <h4 class="card-title text-center">Giriş Yap</h4>
+                                        <form class="login-form mt-4">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Kullanıcı Adı <span class="text-danger">*</span></label>
+                                                        <div class="form-icon position-relative">
+                                                            <i data-feather="user" class="fea icon-sm icons"></i>
+                                                            <input type="text" class="form-control ps-5" placeholder="Kullanıcı Adı" name="email" id="KullaniciAdi" required="">
+                                                        </div>
+                                                    </div>
+                                                </div><!--end col-->
+
+                                                <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Şifre <span class="text-danger">*</span></label>
+                                                        <div class="form-icon position-relative">
+                                                            <i data-feather="key" class="fea icon-sm icons"></i>
+                                                            <input type="password" class="form-control ps-5" placeholder="Şifre" id="Sifre" required="">
+                                                        </div>
+                                                    </div>
+                                                </div><!--end col-->
+
+                                                <div class="col-lg-12 mb-0">
+                                                    <div class="d-grid">
+                                                        <button class="btn btn-primary" type="button" onclick="Login()">Giriş Yap</button>
+                                                    </div>
+                                                </div><!--end col-->
+
+
+
+                                            </div><!--end row-->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div> <!-- end about detail -->
+                </div> <!-- end col -->
+                <div class="col-lg-8 offset-lg-4 padding-less img order-1" style="background-image: url('/Content/assets/images/login.png')" data-jarallax='{"speed": 0.5}'></div><!-- end col -->
+            </div><!--end row-->
+        </div><!--end container fluid-->
+    </section><!--end section-->
+    <!-- Hero End -->
+    <!-- javascript -->
+    <!-- JAVASCRIPT -->
+    <script src="~/AdminContent/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/AdminContent/assets/libs/feather-icons/feather.min.js"></script>
+    <script src="~/AdminContent/assets/libs/simplebar/simplebar.min.js"></script>
+    <!-- Main Js -->
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/AdminContent/assets/js/plugins.init.js"></script>
+    <script src="~/AdminContent/assets/js/app.js"></script>
+    <script src="~/Scripts/SisyaData.js"></script>
+    <script src="~/Scripts/axios.js"></script>
+
+    <script>
+        function Login() {
+            getValue("/Login/GirisYap",
+                { KullaniciAdi: $('#KullaniciAdi').val(), Sifre: $('#Sifre').val() },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        @*setTimeout(function () { window.location.replace("@Url.Action("Index","Home")"); }, 1400); // BAŞKA SAYFAYA GÖNDERME*@
+                        window.location.replace("@Url.Action("Index","Dashboard")")
+                    }
+                    else if (data == 'Hata') {
+                        alert("Hata");
+                    }
+                    else if (data == 'Bos') {
+                        alert("Lütfen Bilgileri Doldurunuz");
+                    }
+                });
+        };
+        function RegisterUser() {
+            getValue("/Login/KayitOl",
+            { RegisterUser: $('#RegisterUser').val(), RegisterEmail: $('#RegisterEmail').val(), RegisterPassword: $('#RegisterPassword').val() },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+
+                        setTimeout(function () { window.location.replace("@Url.Action("Index", "Login")"); }, 1400); // BAŞKA SAYFAYA GÖNDERME
+                    }
+                    else if (data.indexOf('Hata') > -1) {
+                        alert("asdas");
+                    }
+
+                });
+        };
+    </script>
+
+</body>
+
+</html>

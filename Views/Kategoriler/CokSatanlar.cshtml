@@ -1,0 +1,185 @@
+﻿@{
+    ViewBag.Title = "CokSatanlar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Home/Index">Anasayfa</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Çok Satanlar</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="products mb-3">
+                    <div class="row justify-content-center">
+                        <div class="container mb-5">
+                            <div class="row elements">
+                                @foreach (var item in ViewBag.Markalar)
+                                {
+                                    <div class="col-xl-5col col-lg-4 col-md-3 col-6">
+                                        <a href="/Kategoriler/Kategori/@item.ID" class="element-type">
+                                            <div class="element">
+                                                <img src="@item.MarkaResim" alt="Alternate Text" />
+                                                <p>@item.MarkaAdi</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div><!-- End Elements list -->
+                        @foreach (var item in ViewBag.CokSatanlar)
+                        {
+                            <div class="col-6 col-md-4 col-lg-4">
+                                <div class="product product-7 text-center">
+                                    <figure class="product-media">
+                                        @if (item.isTrend == true)
+                                        {
+                                            <span class="product-label label-new">TREND</span>
+                                        }
+                                        @if (item.isYeni == true)
+                                        {
+                                            <span class="product-label label-new">YENİ</span>
+                                        }
+                                        @if (item.isIndirim == true)
+                                        {
+                                            <span class="product-label label-new">İNDİRİM</span>
+                                        }
+
+                                        <a href="/StokDetay/StokDetay/@item.ID">
+                                            <img src="@item.StokResim" alt="Product image" class="product-image" style="min-height:240px">
+                                        </a>
+                                        <div class="product-action">
+                                            <a href="" class="btn-product" onclick="AddCart(@item.ID)"><span>SEPETE EKLE</span></a>
+                                        </div><!-- End .product-action -->
+                                    </figure><!-- End .product-media -->
+
+                                    <div class="product-body">
+                                        <div class="product-cat">
+                                            <a href="#">@item.Marka.MarkaAdi</a>
+                                        </div><!-- End .product-cat -->
+                                        <h3 class="product-title"><a href="/StokDetay/StokDetay/@item.ID">@item.StokAdi</a></h3><!-- End .product-title -->
+                                        <div class="product-price">
+                                            @item.StokFiyat TL
+                                        </div><!-- End .product-price -->
+                                    </div><!-- End .product-body -->
+                                </div><!-- End .product -->
+                            </div><!-- End .col-sm-6 col-lg-4 -->
+                        }
+
+
+
+                    </div><!-- End .row -->
+                </div><!-- End .products -->
+
+
+            </div><!-- End .col-lg-9 -->
+            <aside class="col-lg-3 order-lg-first">
+                <div class="sidebar sidebar-shop">
+
+
+                    <div class="widget ">
+                        <h3 class="widget-title">
+                            <span class="text-danger">
+                                ÜRÜN GRUPLARI
+                            </span>
+                        </h3><!-- End .widget-title -->
+                        <hr />
+
+                        <div class="collapse show" id="widget-1">
+                            <div class="widget-body">
+                                <div class="filter-items filter-items-count">
+                                    @foreach (var item in ViewBag.Marka)
+                                    {
+                                        <a href="/Kategoriler/Kategori/@item.ID" class="text-dark">
+                                            <div class="filter-item">
+
+                                                <div class="custom-control">
+                                                    <i class="icon-angle-right"></i>
+                                                    @item.MenuAdi
+
+                                                </div><!-- End .custom-checkbox -->
+                                            </div><!-- End .filter-item -->
+                                        </a>
+                                    }
+                                </div><!-- End .filter-items -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+
+                </div><!-- End .sidebar sidebar-shop -->
+            </aside><!-- End .col-lg-3 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .page-content -->
+
+<div class="modal fade text-start modal-success" id="SuccessCart" tabindex="-1" aria-labelledby="myModalLabel110" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel110">Başarılı</h5>
+                @*<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>*@
+            </div>
+            <div class="modal-body">
+                Ürün başarıyla sepete eklendi.
+            </div>
+            <div class="modal-footer">
+                <a href="/Home/Index" class="btn btn-success">Alışverişe devam et</a>
+                <a href="/Cart/Index/@Session["ID"]" class="btn btn-success">Sepete Git</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Adjs{
+    <script>
+        @*$('#size-2').change(function () {
+            if (this.checked) {
+               function IndirimliUrunler() {
+                   getValue("Kategoriler/Kategori",
+                 { Indirimli: "true" },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        location.href = '@Url.Action("Kategori", "Kategoriler")';
+                    }
+                    else if (data.i ndexOf('Hata') > -1) {
+                        alert(data)
+                    }
+                });
+        };
+            }
+
+        });*@
+
+
+        function AddCart(ID) {
+            /*var ID = $("#ProductID").val();*/
+            getValue("Cart/AddCart",
+                { ID: ID },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        $('#SuccessCart').modal('show');
+                    }
+                    else if (data.indexOf('Hata') > -1) {
+                        alert(data)
+                    }
+                });
+        };
+    </script>
+}
+
+
+

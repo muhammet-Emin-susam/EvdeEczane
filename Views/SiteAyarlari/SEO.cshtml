@@ -1,0 +1,56 @@
+﻿@model EvdeEczane.Models.SEO
+@{
+    ViewBag.Title = "SEO";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section id="input-group-basic">
+    <div class="row">
+        <!-- Basic -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Admin Ayarları</h4>
+                </div>
+                <div class="card-body">
+
+                    <label class="form-label">Site Başlığı</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Title" value="@Model.Title" id="Title" />
+                    </div>
+                    <label class="form-label">Keyword</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Keywords" value="@Model.Keywords" id="Keyword" />
+                    </div>
+                    <label class="form-label">Description</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Description" value="@Model.Description" id="Description" />
+                    </div>
+                    <div class="input-group">
+                        <button class="btn btn-primary" type="button" onclick="SEOGuncelle(@Model.ID)">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Adjs{
+    <script>
+         function SEOGuncelle(ID) {
+             getValue("SiteAyarlari/SEOGuncelle",
+                 { ID: ID, Title: $("#Title").val(), Keyword: $("#Keyword").val(), Description: $("#Description").val() },
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        location.href = '@Url.Action("SEO", "SiteAyarlari")';
+                    }
+                    else if (data.indexOf('Hata') > -1) {
+                        alert(data)
+                    }
+                });
+        };
+
+    </script>
+}

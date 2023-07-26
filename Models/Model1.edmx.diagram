@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b44a660b0dc54b10bb48db0553cece25" Name="Diagram1">
+        <EntityTypeShape EntityType="EVDEECZANEModel.Admin" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.Adresler" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.Bilgiler" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.Bloglar" Width="1.5" PointX="7.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.Kampanyalar" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.Kullanicilar" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.Marka" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.Menuler" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.SEO" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.SiparisDetay" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.Siparisler" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.Slider" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.Stok" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EVDEECZANEModel.Yorumlar" Width="1.5" PointX="10.5" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="EVDEECZANEModel.FK_Adresler_Kullanicilar" ManuallyRouted="false" />
+        <AssociationConnector Association="EVDEECZANEModel.FK_Siparisler_Adresler" ManuallyRouted="false" />
+        <AssociationConnector Association="EVDEECZANEModel.FK_Siparisler_Kullanicilar" ManuallyRouted="false" />
+        <AssociationConnector Association="EVDEECZANEModel.FK_Yorumlar_Kullanicilar" ManuallyRouted="false" />
+        <AssociationConnector Association="EVDEECZANEModel.FK_Marka_Menuler" ManuallyRouted="false" />
+        <AssociationConnector Association="EVDEECZANEModel.FK_Stok_Marka" ManuallyRouted="false" />
+        <AssociationConnector Association="EVDEECZANEModel.FK_Stok_Menuler" ManuallyRouted="false" />
+        <AssociationConnector Association="EVDEECZANEModel.FK_SiparisDetay_Siparisler" ManuallyRouted="false" />
+        <AssociationConnector Association="EVDEECZANEModel.FK_SiparisDetay_Stok" ManuallyRouted="false" />
+        <AssociationConnector Association="EVDEECZANEModel.FK_Yorumlar_Stok" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

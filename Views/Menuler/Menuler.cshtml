@@ -1,0 +1,123 @@
+﻿@using EvdeEczane.Models
+@model List<Menuler>
+@{
+    ViewBag.Title = "Menuler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row mt-4">
+    <div class="col-12">
+        <h5 class="mb-0">Menuler</h5>
+        <a href="/Menuler/MenuEkle" class="btn btn-dark" style="float:right">Menu Ekle</a>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-2 row-cols-1">
+    @foreach (var item in Model)
+    {
+        <div class="col mt-4">
+            <div class="card shop-list border-0 overflow-hidden rounded">
+                <div class="shop-image position-relative overflow-hidden">
+                    <img src="@item.MenuResim" class="img-fluid" alt="" style="min-height:200px;max-height:200px">
+                    @*<a href="product-detail.html" class="overlay-work">
+                            <img src="~/AdminContent/assets/images/shop/product/s-1.jpg" class="img-fluid" alt="">
+                        </a>*@
+
+                </div>
+                <div class="card-body content p-3 border-top">
+                    <a href="/Menuler/MenuDetay/@item.ID" class="text-dark product-name h6"><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> @item.MenuAdi</span></a>
+                    <div class="d-flex justify-content-between mt-1">
+                        <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            @item.MenuAciklama
+                        </span>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-danger" name="name" value="Menu Sil" onclick="MenuSil(@item.ID)" />
+            </div>
+        </div><!--end col-->
+    }
+</div><!--end row-->
+<div class="row mt-4">
+    <div class="col-12">
+        <h5 class="mb-0">Alt Menuler</h5>
+        <a href="/Menuler/AltMenuEkle" class="btn btn-dark" style="float:right">Alt Menu Ekle</a>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-2 row-cols-1">
+    @foreach (var item in ViewBag.Altmenu)
+    {
+        <div class="col mt-4">
+            <div class="card shop-list border-0 overflow-hidden rounded">
+                <div class="shop-image position-relative overflow-hidden">
+                    <img src="@item.MenuResim" class="img-fluid" alt="" style="min-height:200px;max-height:200px">
+                    @*<a href="product-detail.html" class="overlay-work">
+                            <img src="~/AdminContent/assets/images/shop/product/s-1.jpg" class="img-fluid" alt="">
+                        </a>*@
+
+                </div>
+                <div class="card-body content p-3 border-top">
+                    <a href="/Menuler/MenuDetay/@item.ID" class="text-dark product-name h6"><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> @item.MenuAdi</span></a>
+                    <div class="d-flex justify-content-between mt-1">
+                        <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            @item.MenuAciklama
+                        </span>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-danger" name="name" value="Menu Sil" onclick="MenuSil(@item.ID)" />
+            </div>
+        </div><!--end col-->
+    }
+</div><!--end row-->
+<div class="row mt-4">
+    <div class="col-12">
+        <h5 class="mb-0">Kategori Bazli Menu</h5>
+        <a href="/Menuler/KategoriBazliMenuEkle" class="btn btn-dark" style="float:right">Kategori Bazlı Menu Ekle</a>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-2 row-cols-1">
+    @foreach (var item in ViewBag.KategoriBazliMenu)
+    {
+        <div class="col mt-4">
+            <div class="card shop-list border-0 overflow-hidden rounded">
+                <div class="shop-image position-relative overflow-hidden">
+                    <img src="@item.MenuResim" class="img-fluid" alt="" style="min-height:200px;max-height:200px">
+                    @*<a href="product-detail.html" class="overlay-work">
+                            <img src="~/AdminContent/assets/images/shop/product/s-1.jpg" class="img-fluid" alt="">
+                        </a>*@
+
+                </div>
+                <div class="card-body content p-3 border-top">
+                    <a href="/Menuler/MenuDetay/@item.ID" class="text-dark product-name h6"><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> @item.MenuAdi</span></a>
+                    <div class="d-flex justify-content-between mt-1">
+                        <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            @item.MenuAciklama
+                        </span>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-danger" name="name" value="Menu Sil" onclick="MenuSil(@item.ID)" />
+            </div>
+        </div><!--end col-->
+    }
+</div><!--end row-->
+@section Adjs{
+    <script>
+
+         function MenuSil(ID) {
+             getValue("Menuler/MenuSil",
+                { ID: ID},
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                        location.href = '@Url.Action("Menuler", "Menuler")';
+                    }
+                    else if (data.indexOf('Hata') > -1) {
+                        alert(data)
+                    }
+                });
+        };
+    </script>
+}
+

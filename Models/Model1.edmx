@@ -1,0 +1,938 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EVDEECZANEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminKullaniciAdi" Type="nvarchar(max)" />
+          <Property Name="AdminSifre" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Adresler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciID" Type="int" />
+          <Property Name="AdresAdi" Type="nvarchar" MaxLength="500" />
+          <Property Name="AdresAciklama" Type="nvarchar(max)" />
+          <Property Name="AdresUlke" Type="nvarchar" MaxLength="100" />
+          <Property Name="AdresSehir" Type="nvarchar" MaxLength="100" />
+          <Property Name="AdresIlce" Type="nvarchar" MaxLength="150" />
+          <Property Name="AdresTel" Type="nvarchar" MaxLength="20" />
+          <Property Name="AdresCepTel" Type="nvarchar" MaxLength="20" />
+          <Property Name="AdresTc" Type="nvarchar" MaxLength="15" />
+          <Property Name="FaturaTip" Type="nvarchar" MaxLength="150" />
+          <Property Name="KargoAdi" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Bilgiler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiteLogo" Type="nvarchar(max)" />
+          <Property Name="SiteTel" Type="nvarchar(max)" />
+          <Property Name="FirmaAdi" Type="nvarchar(max)" />
+          <Property Name="SiteEmail" Type="nvarchar(max)" />
+          <Property Name="SiteInstagram" Type="nvarchar(max)" />
+          <Property Name="SiteHakkimizda" Type="nvarchar(max)" />
+          <Property Name="LogoAdi" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Bloglar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogAdi" Type="nvarchar(max)" />
+          <Property Name="BlogAciklama" Type="nvarchar(max)" />
+          <Property Name="BlogTarih" Type="datetime" />
+          <Property Name="BlogResim" Type="nvarchar(max)" />
+          <Property Name="BlogKisaAciklama" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Kampanyalar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KampanyaAdi" Type="nvarchar(max)" />
+          <Property Name="KampanyaAciklama" Type="nvarchar(max)" />
+          <Property Name="KampanyaURL" Type="nvarchar(max)" />
+          <Property Name="KampanyaResim" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Kullanicilar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdSoyad" Type="nvarchar(max)" />
+          <Property Name="KullaniciMail" Type="nvarchar(max)" />
+          <Property Name="KullaniciSifre" Type="nvarchar(max)" />
+          <Property Name="KullaniciCinsiyet" Type="nvarchar" MaxLength="50" />
+          <Property Name="KullaniciTel" Type="nvarchar(max)" />
+          <Property Name="KullaniciAdresID" Type="int" />
+          <Property Name="KullaniciDogumTarihi" Type="datetime" />
+          <Property Name="KullaniciTcKimlik" Type="nvarchar" MaxLength="50" />
+          <Property Name="KullaniciSonGiris" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Marka">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MarkaAdi" Type="nvarchar(max)" />
+          <Property Name="MarkaAciklama" Type="nvarchar(max)" />
+          <Property Name="MarkaResim" Type="nvarchar(max)" />
+          <Property Name="KategoriID" Type="int" />
+        </EntityType>
+        <EntityType Name="Menuler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuAdi" Type="nvarchar(max)" />
+          <Property Name="MenuAciklama" Type="nvarchar(max)" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="MenuResim" Type="nvarchar(max)" />
+          <Property Name="AltMenuID" Type="int" />
+        </EntityType>
+        <EntityType Name="SEO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Keywords" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SiparisDetay">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrunID" Type="int" />
+          <Property Name="Fiyat" Type="money" />
+          <Property Name="Adet" Type="int" />
+          <Property Name="SiparisID" Type="int" />
+        </EntityType>
+        <EntityType Name="Siparisler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciID" Type="int" />
+          <Property Name="SiparisTarihi" Type="datetime" />
+          <Property Name="ToplamTutar" Type="money" />
+          <Property Name="Aciklama" Type="nvarchar(max)" />
+          <Property Name="AdresID" Type="int" />
+        </EntityType>
+        <EntityType Name="Slider">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SliderAdi" Type="nvarchar(max)" />
+          <Property Name="SliderResim" Type="nvarchar(max)" />
+          <Property Name="SliderURL" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Stok">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StokAdi" Type="nvarchar(max)" />
+          <Property Name="StokResim" Type="nvarchar(max)" />
+          <Property Name="StokResimAdi" Type="nvarchar(max)" />
+          <Property Name="StokMarkaID" Type="int" />
+          <Property Name="StokKategoriID" Type="int" />
+          <Property Name="StokYorumID" Type="int" />
+          <Property Name="StokKodu" Type="nvarchar(max)" />
+          <Property Name="StokBarkod" Type="nvarchar(max)" />
+          <Property Name="StokFiyat" Type="money" />
+          <Property Name="StokBakiye" Type="int" />
+          <Property Name="StokTarih" Type="datetime" />
+          <Property Name="StokAciklama" Type="nvarchar(max)" />
+          <Property Name="isTrend" Type="bit" />
+          <Property Name="isYeni" Type="bit" />
+          <Property Name="isIndirim" Type="bit" />
+          <Property Name="IndirimliFiyat" Type="money" />
+          <Property Name="ParentKategoriID" Type="int" />
+          <Property Name="AnaKategoriID" Type="int" />
+        </EntityType>
+        <EntityType Name="Yorumlar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YorumAdi" Type="nvarchar(max)" />
+          <Property Name="YorumAciklama" Type="nvarchar(max)" />
+          <Property Name="KullaniciID" Type="int" />
+          <Property Name="StokID" Type="int" />
+          <Property Name="YorumTarihi" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Adresler_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+          <End Role="Adresler" Type="Self.Adresler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Adresler">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Marka_Menuler">
+          <End Role="Menuler" Type="Self.Menuler" Multiplicity="0..1" />
+          <End Role="Marka" Type="Self.Marka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menuler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Marka">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_Siparisler">
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="0..1" />
+          <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siparisler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SiparisDetay">
+              <PropertyRef Name="SiparisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_Stok">
+          <End Role="Stok" Type="Self.Stok" Multiplicity="0..1" />
+          <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stok">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SiparisDetay">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparisler_Adresler">
+          <End Role="Adresler" Type="Self.Adresler" Multiplicity="0..1" />
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Siparisler">
+              <PropertyRef Name="AdresID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparisler_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Siparisler">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stok_Marka">
+          <End Role="Marka" Type="Self.Marka" Multiplicity="0..1" />
+          <End Role="Stok" Type="Self.Stok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stok">
+              <PropertyRef Name="StokMarkaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stok_Menuler">
+          <End Role="Menuler" Type="Self.Menuler" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Stok" Type="Self.Stok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menuler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stok">
+              <PropertyRef Name="StokKategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorumlar_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+          <End Role="Yorumlar" Type="Self.Yorumlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Yorumlar">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorumlar_Stok">
+          <End Role="Stok" Type="Self.Stok" Multiplicity="0..1" />
+          <End Role="Yorumlar" Type="Self.Yorumlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stok">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Yorumlar">
+              <PropertyRef Name="StokID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EVDEECZANEModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Adresler" EntityType="Self.Adresler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bilgiler" EntityType="Self.Bilgiler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bloglar" EntityType="Self.Bloglar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kampanyalar" EntityType="Self.Kampanyalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marka" EntityType="Self.Marka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menuler" EntityType="Self.Menuler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SEO" EntityType="Self.SEO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiparisDetay" EntityType="Self.SiparisDetay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Siparisler" EntityType="Self.Siparisler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stok" EntityType="Self.Stok" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yorumlar" EntityType="Self.Yorumlar" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Adresler_Kullanicilar" Association="Self.FK_Adresler_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Adresler" EntitySet="Adresler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marka_Menuler" Association="Self.FK_Marka_Menuler">
+            <End Role="Menuler" EntitySet="Menuler" />
+            <End Role="Marka" EntitySet="Marka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_Siparisler" Association="Self.FK_SiparisDetay_Siparisler">
+            <End Role="Siparisler" EntitySet="Siparisler" />
+            <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_Stok" Association="Self.FK_SiparisDetay_Stok">
+            <End Role="Stok" EntitySet="Stok" />
+            <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparisler_Adresler" Association="Self.FK_Siparisler_Adresler">
+            <End Role="Adresler" EntitySet="Adresler" />
+            <End Role="Siparisler" EntitySet="Siparisler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparisler_Kullanicilar" Association="Self.FK_Siparisler_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Siparisler" EntitySet="Siparisler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stok_Marka" Association="Self.FK_Stok_Marka">
+            <End Role="Marka" EntitySet="Marka" />
+            <End Role="Stok" EntitySet="Stok" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stok_Menuler" Association="Self.FK_Stok_Menuler">
+            <End Role="Menuler" EntitySet="Menuler" />
+            <End Role="Stok" EntitySet="Stok" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorumlar_Kullanicilar" Association="Self.FK_Yorumlar_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Yorumlar" EntitySet="Yorumlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorumlar_Stok" Association="Self.FK_Yorumlar_Stok">
+            <End Role="Stok" EntitySet="Stok" />
+            <End Role="Yorumlar" EntitySet="Yorumlar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EVDEECZANEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminKullaniciAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdminSifre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Adresler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciID" Type="Int32" />
+          <Property Name="AdresAdi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AdresAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdresUlke" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AdresSehir" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AdresIlce" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AdresTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AdresCepTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AdresTc" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="FaturaTip" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="KargoAdi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_Adresler_Kullanicilar" FromRole="Adresler" ToRole="Kullanicilar" />
+          <NavigationProperty Name="Siparisler" Relationship="Self.FK_Siparisler_Adresler" FromRole="Adresler" ToRole="Siparisler" />
+        </EntityType>
+        <EntityType Name="Bilgiler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteLogo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SiteTel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirmaAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SiteEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SiteInstagram" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SiteHakkimizda" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LogoAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Bloglar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlogAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlogTarih" Type="DateTime" Precision="3" />
+          <Property Name="BlogResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlogKisaAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Kampanyalar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KampanyaAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KampanyaAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KampanyaURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KampanyaResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Kullanicilar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdSoyad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciSifre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciCinsiyet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciTel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciAdresID" Type="Int32" />
+          <Property Name="KullaniciDogumTarihi" Type="DateTime" Precision="3" />
+          <Property Name="KullaniciTcKimlik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciSonGiris" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Adresler" Relationship="Self.FK_Adresler_Kullanicilar" FromRole="Kullanicilar" ToRole="Adresler" />
+          <NavigationProperty Name="Siparisler" Relationship="Self.FK_Siparisler_Kullanicilar" FromRole="Kullanicilar" ToRole="Siparisler" />
+          <NavigationProperty Name="Yorumlar" Relationship="Self.FK_Yorumlar_Kullanicilar" FromRole="Kullanicilar" ToRole="Yorumlar" />
+        </EntityType>
+        <EntityType Name="Marka">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MarkaAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MarkaAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MarkaResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KategoriID" Type="Int32" />
+          <NavigationProperty Name="Menuler" Relationship="Self.FK_Marka_Menuler" FromRole="Marka" ToRole="Menuler" />
+          <NavigationProperty Name="Stok" Relationship="Self.FK_Stok_Marka" FromRole="Marka" ToRole="Stok" />
+        </EntityType>
+        <EntityType Name="Menuler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MenuAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="MenuResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AltMenuID" Type="Int32" />
+          <NavigationProperty Name="Marka" Relationship="Self.FK_Marka_Menuler" FromRole="Menuler" ToRole="Marka" />
+          <NavigationProperty Name="Stok" Relationship="Self.FK_Stok_Menuler" FromRole="Menuler" ToRole="Stok" />
+        </EntityType>
+        <EntityType Name="SEO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SiparisDetay">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrunID" Type="Int32" />
+          <Property Name="Fiyat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Adet" Type="Int32" />
+          <Property Name="SiparisID" Type="Int32" />
+          <NavigationProperty Name="Siparisler" Relationship="Self.FK_SiparisDetay_Siparisler" FromRole="SiparisDetay" ToRole="Siparisler" />
+          <NavigationProperty Name="Stok" Relationship="Self.FK_SiparisDetay_Stok" FromRole="SiparisDetay" ToRole="Stok" />
+        </EntityType>
+        <EntityType Name="Siparisler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciID" Type="Int32" />
+          <Property Name="SiparisTarihi" Type="DateTime" Precision="3" />
+          <Property Name="ToplamTutar" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdresID" Type="Int32" />
+          <NavigationProperty Name="Adresler" Relationship="Self.FK_Siparisler_Adresler" FromRole="Siparisler" ToRole="Adresler" />
+          <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_Siparisler_Kullanicilar" FromRole="Siparisler" ToRole="Kullanicilar" />
+          <NavigationProperty Name="SiparisDetay" Relationship="Self.FK_SiparisDetay_Siparisler" FromRole="Siparisler" ToRole="SiparisDetay" />
+        </EntityType>
+        <EntityType Name="Slider">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SliderAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SliderResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SliderURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Stok">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StokAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StokResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StokResimAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StokMarkaID" Type="Int32" />
+          <Property Name="StokKategoriID" Type="Int32" />
+          <Property Name="StokYorumID" Type="Int32" />
+          <Property Name="StokKodu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StokBarkod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StokFiyat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="StokBakiye" Type="Int32" />
+          <Property Name="StokTarih" Type="DateTime" Precision="3" />
+          <Property Name="StokAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isTrend" Type="Boolean" />
+          <Property Name="isYeni" Type="Boolean" />
+          <Property Name="isIndirim" Type="Boolean" />
+          <Property Name="IndirimliFiyat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ParentKategoriID" Type="Int32" />
+          <Property Name="AnaKategoriID" Type="Int32" />
+          <NavigationProperty Name="Marka" Relationship="Self.FK_Stok_Marka" FromRole="Stok" ToRole="Marka" />
+          <NavigationProperty Name="Menuler" Relationship="Self.FK_Stok_Menuler" FromRole="Stok" ToRole="Menuler" />
+          <NavigationProperty Name="SiparisDetay" Relationship="Self.FK_SiparisDetay_Stok" FromRole="Stok" ToRole="SiparisDetay" />
+          <NavigationProperty Name="Yorumlar" Relationship="Self.FK_Yorumlar_Stok" FromRole="Stok" ToRole="Yorumlar" />
+        </EntityType>
+        <EntityType Name="Yorumlar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YorumAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YorumAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciID" Type="Int32" />
+          <Property Name="StokID" Type="Int32" />
+          <Property Name="YorumTarihi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_Yorumlar_Kullanicilar" FromRole="Yorumlar" ToRole="Kullanicilar" />
+          <NavigationProperty Name="Stok" Relationship="Self.FK_Yorumlar_Stok" FromRole="Yorumlar" ToRole="Stok" />
+        </EntityType>
+        <Association Name="FK_Adresler_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+          <End Role="Adresler" Type="Self.Adresler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Adresler">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparisler_Adresler">
+          <End Role="Adresler" Type="Self.Adresler" Multiplicity="0..1" />
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Siparisler">
+              <PropertyRef Name="AdresID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparisler_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Siparisler">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorumlar_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+          <End Role="Yorumlar" Type="Self.Yorumlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Yorumlar">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Marka_Menuler">
+          <End Role="Menuler" Type="Self.Menuler" Multiplicity="0..1" />
+          <End Role="Marka" Type="Self.Marka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menuler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Marka">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stok_Marka">
+          <End Role="Marka" Type="Self.Marka" Multiplicity="0..1" />
+          <End Role="Stok" Type="Self.Stok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stok">
+              <PropertyRef Name="StokMarkaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stok_Menuler">
+          <End Role="Menuler" Type="Self.Menuler" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Stok" Type="Self.Stok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menuler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stok">
+              <PropertyRef Name="StokKategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_Siparisler">
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="0..1" />
+          <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siparisler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SiparisDetay">
+              <PropertyRef Name="SiparisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_Stok">
+          <End Role="Stok" Type="Self.Stok" Multiplicity="0..1" />
+          <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stok">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SiparisDetay">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorumlar_Stok">
+          <End Role="Stok" Type="Self.Stok" Multiplicity="0..1" />
+          <End Role="Yorumlar" Type="Self.Yorumlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stok">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Yorumlar">
+              <PropertyRef Name="StokID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EVDEECZANEEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Adresler" EntityType="Self.Adresler" />
+          <EntitySet Name="Bilgiler" EntityType="Self.Bilgiler" />
+          <EntitySet Name="Bloglar" EntityType="Self.Bloglar" />
+          <EntitySet Name="Kampanyalar" EntityType="Self.Kampanyalar" />
+          <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" />
+          <EntitySet Name="Marka" EntityType="Self.Marka" />
+          <EntitySet Name="Menuler" EntityType="Self.Menuler" />
+          <EntitySet Name="SEO" EntityType="Self.SEO" />
+          <EntitySet Name="SiparisDetay" EntityType="Self.SiparisDetay" />
+          <EntitySet Name="Siparisler" EntityType="Self.Siparisler" />
+          <EntitySet Name="Slider" EntityType="Self.Slider" />
+          <EntitySet Name="Stok" EntityType="Self.Stok" />
+          <EntitySet Name="Yorumlar" EntityType="Self.Yorumlar" />
+          <AssociationSet Name="FK_Adresler_Kullanicilar" Association="Self.FK_Adresler_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Adresler" EntitySet="Adresler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparisler_Adresler" Association="Self.FK_Siparisler_Adresler">
+            <End Role="Adresler" EntitySet="Adresler" />
+            <End Role="Siparisler" EntitySet="Siparisler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparisler_Kullanicilar" Association="Self.FK_Siparisler_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Siparisler" EntitySet="Siparisler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorumlar_Kullanicilar" Association="Self.FK_Yorumlar_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Yorumlar" EntitySet="Yorumlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marka_Menuler" Association="Self.FK_Marka_Menuler">
+            <End Role="Menuler" EntitySet="Menuler" />
+            <End Role="Marka" EntitySet="Marka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stok_Marka" Association="Self.FK_Stok_Marka">
+            <End Role="Marka" EntitySet="Marka" />
+            <End Role="Stok" EntitySet="Stok" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stok_Menuler" Association="Self.FK_Stok_Menuler">
+            <End Role="Menuler" EntitySet="Menuler" />
+            <End Role="Stok" EntitySet="Stok" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_Siparisler" Association="Self.FK_SiparisDetay_Siparisler">
+            <End Role="Siparisler" EntitySet="Siparisler" />
+            <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_Stok" Association="Self.FK_SiparisDetay_Stok">
+            <End Role="Stok" EntitySet="Stok" />
+            <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorumlar_Stok" Association="Self.FK_Yorumlar_Stok">
+            <End Role="Stok" EntitySet="Stok" />
+            <End Role="Yorumlar" EntitySet="Yorumlar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EVDEECZANEModelStoreContainer" CdmEntityContainer="EVDEECZANEEntities3">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AdminKullaniciAdi" ColumnName="AdminKullaniciAdi" />
+                <ScalarProperty Name="AdminSifre" ColumnName="AdminSifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Adresler">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.Adresler">
+              <MappingFragment StoreEntitySet="Adresler">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="AdresAdi" ColumnName="AdresAdi" />
+                <ScalarProperty Name="AdresAciklama" ColumnName="AdresAciklama" />
+                <ScalarProperty Name="AdresUlke" ColumnName="AdresUlke" />
+                <ScalarProperty Name="AdresSehir" ColumnName="AdresSehir" />
+                <ScalarProperty Name="AdresIlce" ColumnName="AdresIlce" />
+                <ScalarProperty Name="AdresTel" ColumnName="AdresTel" />
+                <ScalarProperty Name="AdresCepTel" ColumnName="AdresCepTel" />
+                <ScalarProperty Name="AdresTc" ColumnName="AdresTc" />
+                <ScalarProperty Name="FaturaTip" ColumnName="FaturaTip" />
+                <ScalarProperty Name="KargoAdi" ColumnName="KargoAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bilgiler">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.Bilgiler">
+              <MappingFragment StoreEntitySet="Bilgiler">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SiteLogo" ColumnName="SiteLogo" />
+                <ScalarProperty Name="SiteTel" ColumnName="SiteTel" />
+                <ScalarProperty Name="FirmaAdi" ColumnName="FirmaAdi" />
+                <ScalarProperty Name="SiteEmail" ColumnName="SiteEmail" />
+                <ScalarProperty Name="SiteInstagram" ColumnName="SiteInstagram" />
+                <ScalarProperty Name="SiteHakkimizda" ColumnName="SiteHakkimizda" />
+                <ScalarProperty Name="LogoAdi" ColumnName="LogoAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bloglar">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.Bloglar">
+              <MappingFragment StoreEntitySet="Bloglar">
+                <ScalarProperty Name="BlogKisaAciklama" ColumnName="BlogKisaAciklama" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BlogAdi" ColumnName="BlogAdi" />
+                <ScalarProperty Name="BlogAciklama" ColumnName="BlogAciklama" />
+                <ScalarProperty Name="BlogTarih" ColumnName="BlogTarih" />
+                <ScalarProperty Name="BlogResim" ColumnName="BlogResim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kampanyalar">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.Kampanyalar">
+              <MappingFragment StoreEntitySet="Kampanyalar">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KampanyaAdi" ColumnName="KampanyaAdi" />
+                <ScalarProperty Name="KampanyaAciklama" ColumnName="KampanyaAciklama" />
+                <ScalarProperty Name="KampanyaURL" ColumnName="KampanyaURL" />
+                <ScalarProperty Name="KampanyaResim" ColumnName="KampanyaResim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanicilar">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.Kullanicilar">
+              <MappingFragment StoreEntitySet="Kullanicilar">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KullaniciAdSoyad" ColumnName="KullaniciAdSoyad" />
+                <ScalarProperty Name="KullaniciMail" ColumnName="KullaniciMail" />
+                <ScalarProperty Name="KullaniciSifre" ColumnName="KullaniciSifre" />
+                <ScalarProperty Name="KullaniciCinsiyet" ColumnName="KullaniciCinsiyet" />
+                <ScalarProperty Name="KullaniciTel" ColumnName="KullaniciTel" />
+                <ScalarProperty Name="KullaniciAdresID" ColumnName="KullaniciAdresID" />
+                <ScalarProperty Name="KullaniciDogumTarihi" ColumnName="KullaniciDogumTarihi" />
+                <ScalarProperty Name="KullaniciTcKimlik" ColumnName="KullaniciTcKimlik" />
+                <ScalarProperty Name="KullaniciSonGiris" ColumnName="KullaniciSonGiris" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marka">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.Marka">
+              <MappingFragment StoreEntitySet="Marka">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MarkaAdi" ColumnName="MarkaAdi" />
+                <ScalarProperty Name="MarkaAciklama" ColumnName="MarkaAciklama" />
+                <ScalarProperty Name="MarkaResim" ColumnName="MarkaResim" />
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menuler">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.Menuler">
+              <MappingFragment StoreEntitySet="Menuler">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MenuAdi" ColumnName="MenuAdi" />
+                <ScalarProperty Name="MenuAciklama" ColumnName="MenuAciklama" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="MenuResim" ColumnName="MenuResim" />
+                <ScalarProperty Name="AltMenuID" ColumnName="AltMenuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SEO">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.SEO">
+              <MappingFragment StoreEntitySet="SEO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiparisDetay">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.SiparisDetay">
+              <MappingFragment StoreEntitySet="SiparisDetay">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="SiparisID" ColumnName="SiparisID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Siparisler">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.Siparisler">
+              <MappingFragment StoreEntitySet="Siparisler">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="SiparisTarihi" ColumnName="SiparisTarihi" />
+                <ScalarProperty Name="ToplamTutar" ColumnName="ToplamTutar" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="AdresID" ColumnName="AdresID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Slider">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.Slider">
+              <MappingFragment StoreEntitySet="Slider">
+                <ScalarProperty Name="SliderURL" ColumnName="SliderURL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SliderAdi" ColumnName="SliderAdi" />
+                <ScalarProperty Name="SliderResim" ColumnName="SliderResim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stok">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.Stok">
+              <MappingFragment StoreEntitySet="Stok">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StokAdi" ColumnName="StokAdi" />
+                <ScalarProperty Name="StokResim" ColumnName="StokResim" />
+                <ScalarProperty Name="StokResimAdi" ColumnName="StokResimAdi" />
+                <ScalarProperty Name="StokMarkaID" ColumnName="StokMarkaID" />
+                <ScalarProperty Name="StokKategoriID" ColumnName="StokKategoriID" />
+                <ScalarProperty Name="StokYorumID" ColumnName="StokYorumID" />
+                <ScalarProperty Name="StokKodu" ColumnName="StokKodu" />
+                <ScalarProperty Name="StokBarkod" ColumnName="StokBarkod" />
+                <ScalarProperty Name="StokFiyat" ColumnName="StokFiyat" />
+                <ScalarProperty Name="StokBakiye" ColumnName="StokBakiye" />
+                <ScalarProperty Name="StokTarih" ColumnName="StokTarih" />
+                <ScalarProperty Name="StokAciklama" ColumnName="StokAciklama" />
+                <ScalarProperty Name="isTrend" ColumnName="isTrend" />
+                <ScalarProperty Name="isYeni" ColumnName="isYeni" />
+                <ScalarProperty Name="isIndirim" ColumnName="isIndirim" />
+                <ScalarProperty Name="IndirimliFiyat" ColumnName="IndirimliFiyat" />
+                <ScalarProperty Name="ParentKategoriID" ColumnName="ParentKategoriID" />
+                <ScalarProperty Name="AnaKategoriID" ColumnName="AnaKategoriID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yorumlar">
+            <EntityTypeMapping TypeName="EVDEECZANEModel.Yorumlar">
+              <MappingFragment StoreEntitySet="Yorumlar">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="YorumAdi" ColumnName="YorumAdi" />
+                <ScalarProperty Name="YorumAciklama" ColumnName="YorumAciklama" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="StokID" ColumnName="StokID" />
+                <ScalarProperty Name="YorumTarihi" ColumnName="YorumTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

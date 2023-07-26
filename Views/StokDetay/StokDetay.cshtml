@@ -1,0 +1,491 @@
+﻿@model EvdeEczane.Models.Stok
+@{
+    ViewBag.Title = "StokDetay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container d-flex align-items-center">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Home/Index">Anasayfa</a></li>
+            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Default</li>
+        </ol>
+
+
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="page-content">
+    <div class="container">
+        <div class="product-details-top">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="product-gallery">
+                        <div class="row">
+                            <figure class="product-main-image">
+                                <img id="product-zoom" src="@Model.StokResim" alt="product image">
+
+
+                            </figure><!-- End .product-main-image -->
+
+
+                        </div><!-- End .row -->
+                    </div><!-- End .product-gallery -->
+                </div><!-- End .col-md-6 -->
+
+                <div class="col-md-6">
+                    <div class="product-details">
+                        <h1 class="product-title">@Model.StokAdi</h1><!-- End .product-title -->
+                        <div class="product-price">
+                            @Model.StokFiyat TL
+                        </div><!-- End .product-price -->
+
+
+                        <hr />
+                        <div class="product-cat">
+                            <span>Kategori:</span>
+                            <a href="#">@Model.Menuler.MenuAdi</a>
+                            <br />
+                            <br />
+                            <span>Marka:</span>
+                            <a href="#">@Model.Marka.MarkaAdi</a>
+                            <br />
+                            <br />
+                            <span>Stok Kodu:</span>
+                            <a href="#">@Model.StokKodu</a>
+                            <br />
+                            <br />
+                            <span>Barkod:</span>
+                            <a href="#">@Model.StokBarkod</a>
+                        </div>
+                        <hr />
+                        <div class="details-filter-row details-row-size">
+                            <label for="qty">Adet:</label>
+                            <div class="product-details-quantity">
+                                <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                            </div><!-- End .product-details-quantity -->
+                        </div><!-- End .details-filter-row -->
+
+                        <div class="product-details-action">
+                            <a href="#" class="btn btn-danger btn-lg" onclick="AddCart(@Model.ID)"><span>SEPETE EKLE</span></a>
+
+                            <div class="details-action-wrapper">
+                                <a href="#" class="btn btn-dark btn-lg" title="Wishlist"><span>HEMEN AL</span></a>
+                            </div><!-- End .details-action-wrapper -->
+                        </div><!-- End .product-details-action -->
+
+
+                    </div><!-- End .product-details -->
+                </div><!-- End .col-md-6 -->
+            </div><!-- End .row -->
+        </div><!-- End .product-details-top -->
+
+        <div class="product-details-tab">
+            <ul class="nav nav-pills justify-content-center" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Açıklama</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Önerileriniz</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Kargo ve Teslimat</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">İptal ve İade</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
+                    <div class="product-desc-content">
+                        <h3>Ürün Bilgisi</h3>
+                        <p>@Model.StokAciklama</p>
+
+                    </div><!-- End .product-desc-content -->
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+                    <div class="product-desc-content">
+                        <h3>Bilgiler</h3>
+                        <p>
+                            Bu ürünün fiyat bilgisi, resim, ürün açıklamalarında ve diğer konularda yetersiz gördüğünüz noktaları öneri formunu kullanarak tarafımıza iletebilirsiniz.
+                            Görüş ve önerileriniz için teşekkür ederiz.
+                        </p>
+
+
+                    </div><!-- End .product-desc-content -->
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
+                    <div class="product-desc-content">
+                        <h3>Kargo ve Teslimat Süreci</h3>
+                        <p>
+                            -Talep edilen ürünün sipariş süreci tamamlandıktan sonra kargo ve teslimat süreci içerisine girilmektedir. Bu doğrultuda ürünün siparişinin tamamlandığı saat ve gün kriterleri çerçevesinde kargo süresi değişiklik gösterebilmektedir.
+                            <br />
+
+
+
+                            -Siparişler oluşturulma sırasına göre mesai saatleri içinde sırayla işleme alınarak mümkün olan en kısa sürede kargoya hazırlanmaktadır. Kargo çıkışları gerçekleştikten sonra kargo takip mesajı sistemde kayıtlı telefon numaranıza iletilmektedir.
+                            <br />
+
+
+                            -Ürünün sipariş aşamasından satın alan kişiye ulaşımına kadar içeriği sadece paketleme ile ilgilenen Evdeeczane ekipleri tarafından bilinmektedir.
+
+                            <br />
+
+                            -Ürünün ödemesi banka havalesi veya EFT ile gerçekleşmektedir. Buna ek olarak Evdeeczane YapıKredi Banka hesaplarına para yatırarak da ödemeyi gerçekleştirmek mümkündür.
+
+                            <br />
+
+                            -Evdeeczane tarafından onaylanan siparişler en geç 3 iş günü içerisinde kargoya verilmektedir. Onaylama takibini ürünü satın aldığınız ekrandan gerçekleştirebilirsiniz.
+
+                            <br />
+
+                            -Müşteri temsilcileri ile iletişime geçerek farklı teslimat şartları hakkında bilgi alıp teslimat şartlarında değişikliklere gidebilirsiniz.
+
+                            <br />
+
+                            -Kargo ve teslimat aşamasına geçiş öncesinde sistem herhangi bir şekilde ödeme yapma konusunda hata verir ise, alıcı bu durum ile alakalı bilgilendirilmektedir.
+
+                            <br />
+
+                            -Evdeeczane internet sitesinden temin etmek istediğiniz ürünlerin bedeli 250 TL ve üzeri olduğu takdirde herhangi bir kargo ücreti (Sendeo) alınmamaktadır.
+                            <br />
+
+                            -Kargo firmasının talebi doğrultusunda; kapıda nakit ödeme yapmak isteyen alıcı, kargo teslim ücreti haricinde ekstra olarak 10 TL ücrete tabii tutulmaktadır.  (Yurtiçi Kargo)
+
+                            <br />
+
+                            -Kargo firması tarafından ürün, kargoya verildikten sonra takip eden ortalama 3 iş günü içerisinde kullanıcıya teslim edilmektedir.
+                        </p>
+                    </div><!-- End .product-desc-content -->
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
+                    <div class="product-desc-content">
+                        <h3>İptal ve İade Süreci</h3>
+                        Satın aldığınız ürünü iptal veya iade etmek istediğiniz takdirde 14 günlük süre içerisinde iptal veya iade sürecini gerçekleştirebilirsiniz.
+
+                        Bu süreçte ürünü satın aldıktan sonra Evdeeczane ile iletişime geçerek faturası ile beraber ürünü iade etmeniz mümkündür.
+
+
+
+                        İade etmek istediğiniz ürünü Evdeeczane ile iletişime geçtikten sonra Yurtiçi kargo yolu ile iade edebilirsiniz.
+
+                        İade süreci esnasında alıcı tarafından bir hata gerçekleşmediği ve şartlar sağlandığı halde iade satıcı tarafından kabul edilir ve masraflar satıcıya ait olur.
+
+
+
+                        Alıcı tarafından satın alınan bir ürün, çeşitli nedenlerden veya olası problemlerden dolayı iptal veya iade edilmek istenirse belirli süreçten geçmektedir.
+
+                        Bu doğrultuda:
+
+
+
+                        -Kargo taşıma aşamasına henüz geçmemiş olan ürün iptal edilerek, ödenen miktar alıcıya geri iade edilmektedir.
+
+
+
+                        -Satın alma işlemi gerçekleşen ürün, kargo taşıma aşamasına geldiği zaman iptal edilememektedir.
+
+
+
+                        - Alıcı tarafından teslim alınan ürün, belirli koşullar dahilinde 14 günlük süre içerisinde iptal veya iade edilebilir.
+
+                        Bu koşullar ürün çeşidine, ambalajının açılma durumuna ve ürünün hasarlı, bozuk veya problemli olmasına göre değişmektedir. Buna göre;
+
+
+
+                        -Hijyen kuralları ve çeşitli nedenlerden dolayı iptal veya iade edilemeyecek ürünler bulunmaktadır. Bu ürünler; iç giyim alt parçaları, mayo ve bikini altları, makyaj malzemeleri, tek kullanımlık ürünler, çabuk bozulma tehlikesi olan veya son kullanma tarihi geçme ihtimali olan mallar, alıcıya teslim edilmesinin ardından alıcı tarafından ambalajı açıldığı takdirde iade edilmesi sağlık ve hijyen açısından uygun olmayan ürünler, teslim edildikten sonra başka ürünlerle karışan ve doğası gereği ayrıştırılması mümkün olmayan ürünler, abonelik sözleşmesi kapsamında sağlananlar dışında, gazete ve dergi gibi süreli yayınlara ilişkin mallar, elektronik ortamda anında ifa edilen hizmetler veya tüketiciye anında teslim edilen gayri maddi mallar ile ses veya görüntü kayıtlarının, kitap, dijital içerik, yazılım programlarının, veri kaydedebilme ve veri depolama cihazlarının, bilgisayar sarf malzemelerinin, ambalajının alıcı tarafından açıldığı takdirde iadesi mümkün olmayan ürünler sınıfına girmesine karar verilmiştir.
+
+
+
+                        Ambalajı açılmadığı takdirde iade edilebilecek ürünler ise:
+
+
+
+                        -Kozmetik ve kişisel bakım ürünleri, iç giyim ürünleri, mayo, bikini, kitap, kopyalanabilir yazılım ve programlar, DVD, VCD, CD ve kasetler ile kırtasiye sarf malzemeleri olarak belirlenmiştir.
+
+
+
+                        -İadesi gerçekleşen ürünleri satıcı, 20 günlük süre içerisinde teslim almak durumundadır.
+                    </div>
+                </div><!-- .End .tab-pane -->
+
+            </div><!-- End .tab-content -->
+        </div><!-- End .product-details-tab -->
+
+        <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
+
+        <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+             data-owl-options='{
+                            "nav": false,
+                            "dots": true,
+                            "margin": 20,
+                            "loop": false,
+                            "responsive": {
+                                "0": {
+                                    "items":1
+                                },
+                                "480": {
+                                    "items":2
+                                },
+                                "768": {
+                                    "items":3
+                                },
+                                "992": {
+                                    "items":4
+                                },
+                                "1200": {
+                                    "items":4,
+                                    "nav": true,
+                                    "dots": false
+                                }
+                            }
+                        }'>
+            <div class="product product-7 text-center">
+                <figure class="product-media">
+                    <span class="product-label label-new">New</span>
+                    <a href="product.html">
+                        <img src="~/Content/assets/images/products/product-4.jpg" alt="Product image" class="product-image">
+                    </a>
+
+                    <div class="product-action-vertical">
+                        <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                        <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                    </div><!-- End .product-action-vertical -->
+
+                    <div class="product-action">
+                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div><!-- End .product-action -->
+                </figure><!-- End .product-media -->
+
+                <div class="product-body">
+                    <div class="product-cat">
+                        <a href="#">Women</a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title"><a href="product.html">Brown paperbag waist <br>pencil skirt</a></h3><!-- End .product-title -->
+                    <div class="product-price">
+                        $60.00
+                    </div><!-- End .product-price -->
+                    <div class="ratings-container">
+                        <div class="ratings">
+                            <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                        </div><!-- End .ratings -->
+                        <span class="ratings-text">( 2 Reviews )</span>
+                    </div><!-- End .rating-container -->
+
+                    <div class="product-nav product-nav-thumbs">
+                        <a href="#" class="active">
+                            <img src="~/Content/assets/images/products/product-4-thumb.jpg" alt="product desc">
+                        </a>
+                        <a href="#">
+                            <img src="~/Content/assets/images/products/product-4-2-thumb.jpg" alt="product desc">
+                        </a>
+
+                        <a href="#">
+                            <img src="~/Content/assets/images/products/product-4-3-thumb.jpg" alt="product desc">
+                        </a>
+                    </div><!-- End .product-nav -->
+                </div><!-- End .product-body -->
+            </div><!-- End .product -->
+
+            <div class="product product-7 text-center">
+                <figure class="product-media">
+                    <span class="product-label label-out">Out of Stock</span>
+                    <a href="product.html">
+                        <img src="~/Content/assets/images/products/product-6.jpg" alt="Product image" class="product-image">
+                    </a>
+
+                    <div class="product-action-vertical">
+                        <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                        <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                    </div><!-- End .product-action-vertical -->
+
+                    <div class="product-action">
+                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div><!-- End .product-action -->
+                </figure><!-- End .product-media -->
+
+                <div class="product-body">
+                    <div class="product-cat">
+                        <a href="#">Jackets</a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title"><a href="product.html">Khaki utility boiler jumpsuit</a></h3><!-- End .product-title -->
+                    <div class="product-price">
+                        <span class="out-price">$120.00</span>
+                    </div><!-- End .product-price -->
+                    <div class="ratings-container">
+                        <div class="ratings">
+                            <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                        </div><!-- End .ratings -->
+                        <span class="ratings-text">( 6 Reviews )</span>
+                    </div><!-- End .rating-container -->
+                </div><!-- End .product-body -->
+            </div><!-- End .product -->
+
+            <div class="product product-7 text-center">
+                <figure class="product-media">
+                    <span class="product-label label-top">Top</span>
+                    <a href="product.html">
+                        <img src="~/Content/assets/images/products/product-11.jpg" alt="Product image" class="product-image">
+                    </a>
+
+                    <div class="product-action-vertical">
+                        <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                        <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                    </div><!-- End .product-action-vertical -->
+
+                    <div class="product-action">
+                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div><!-- End .product-action -->
+                </figure><!-- End .product-media -->
+
+                <div class="product-body">
+                    <div class="product-cat">
+                        <a href="#">Shoes</a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title"><a href="product.html">Light brown studded Wide fit wedges</a></h3><!-- End .product-title -->
+                    <div class="product-price">
+                        $110.00
+                    </div><!-- End .product-price -->
+                    <div class="ratings-container">
+                        <div class="ratings">
+                            <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                        </div><!-- End .ratings -->
+                        <span class="ratings-text">( 1 Reviews )</span>
+                    </div><!-- End .rating-container -->
+
+                    <div class="product-nav product-nav-thumbs">
+                        <a href="#" class="active">
+                            <img src="~/Content/assets/images/products/product-11-thumb.jpg" alt="product desc">
+                        </a>
+                        <a href="#">
+                            <img src="~/Content/assets/images/products/product-11-2-thumb.jpg" alt="product desc">
+                        </a>
+
+                        <a href="#">
+                            <img src="~/Content/assets/images/products/product-11-3-thumb.jpg" alt="product desc">
+                        </a>
+                    </div><!-- End .product-nav -->
+                </div><!-- End .product-body -->
+            </div><!-- End .product -->
+
+            <div class="product product-7 text-center">
+                <figure class="product-media">
+                    <a href="product.html">
+                        <img src="~/Content/assets/images/products/product-10.jpg" alt="Product image" class="product-image">
+                    </a>
+
+                    <div class="product-action-vertical">
+                        <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                        <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                    </div><!-- End .product-action-vertical -->
+
+                    <div class="product-action">
+                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div><!-- End .product-action -->
+                </figure><!-- End .product-media -->
+
+                <div class="product-body">
+                    <div class="product-cat">
+                        <a href="#">Jumpers</a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title"><a href="product.html">Yellow button front tea top</a></h3><!-- End .product-title -->
+                    <div class="product-price">
+                        $56.00
+                    </div><!-- End .product-price -->
+                    <div class="ratings-container">
+                        <div class="ratings">
+                            <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
+                        </div><!-- End .ratings -->
+                        <span class="ratings-text">( 0 Reviews )</span>
+                    </div><!-- End .rating-container -->
+                </div><!-- End .product-body -->
+            </div><!-- End .product -->
+
+            <div class="product product-7 text-center">
+                <figure class="product-media">
+                    <a href="product.html">
+                        <img src="~/Content/assets/images/products/product-7.jpg" alt="Product image" class="product-image">
+                    </a>
+
+                    <div class="product-action-vertical">
+                        <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                        <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                    </div><!-- End .product-action-vertical -->
+
+                    <div class="product-action">
+                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div><!-- End .product-action -->
+                </figure><!-- End .product-media -->
+
+                <div class="product-body">
+                    <div class="product-cat">
+                        <a href="#">Jeans</a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title"><a href="product.html">Blue utility pinafore denim dress</a></h3><!-- End .product-title -->
+                    <div class="product-price">
+                        $76.00
+                    </div><!-- End .product-price -->
+                    <div class="ratings-container">
+                        <div class="ratings">
+                            <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                        </div><!-- End .ratings -->
+                        <span class="ratings-text">( 2 Reviews )</span>
+                    </div><!-- End .rating-container -->
+                </div><!-- End .product-body -->
+            </div><!-- End .product -->
+        </div><!-- End .owl-carousel -->
+    </div><!-- End .container -->
+</div><!-- End .page-content -->
+
+
+<div class="modal fade text-start modal-success" id="SuccessCart" tabindex="-1" aria-labelledby="myModalLabel110" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel110">Başarılı</h5>
+                @*<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>*@
+            </div>
+            <div class="modal-body">
+                Ürün başarıyla sepete eklendi.
+            </div>
+            <div class="modal-footer">
+                <a href="/Home/Index" class="btn btn-success">Alışverişe devam et</a>
+                <a href="/Cart/Index/@Session["ID"]" class="btn btn-success">Sepete Git</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Adjs
+{
+    <script>
+
+
+
+
+        function AddCart(ID) {
+            /*var ID = $("#ProductID").val();*/
+            getValue("Cart/AddCart",
+                { ID : ID},
+                function (data, err) {
+                    if (!data) {
+                        return;
+                    } else if (data == 'Başarılı') {
+                     $('#SuccessCart').modal('show');
+                    }
+                    else if (data.indexOf('Hata') > -1) {
+                        alert(data)
+                    }
+                });
+        };
+
+
+
+    </script>
+}
